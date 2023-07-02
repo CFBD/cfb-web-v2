@@ -1,45 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { defineStore } from "pinia";
 import { usePrimeVue } from "primevue/config";
-import { type MenuItem } from "primevue/menuitem";
 
 export const useMainStore = defineStore("main", () => {
   const PrimeVue = usePrimeVue();
-
-  const loggedIn = ref(true);
-  const roles = ref([]);
-
-  const menuItems = computed((): MenuItem[] => {
-    if (!loggedIn.value) {
-      return [
-        {
-          label: "Home",
-        },
-        {
-          label: "Leaderboard",
-        },
-        {
-          label: "About",
-        },
-      ];
-    } else {
-      return [
-        {
-          label: "Home",
-        },
-        {
-          label: "History",
-        },
-        {
-          label: "Leaderboard",
-        },
-        {
-          label: "About",
-        },
-      ];
-    }
-  });
 
   const darkMode = ref(localStorage.getItem("isDarkMode") == "true");
   if (!darkMode.value) {
@@ -66,5 +31,5 @@ export const useMainStore = defineStore("main", () => {
     );
   };
 
-  return { loggedIn, roles, darkMode, menuItems, toggleDarkMode };
+  return { darkMode, toggleDarkMode };
 });

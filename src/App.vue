@@ -1,12 +1,16 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
+import { RouterView } from "vue-router";
 import Navigation from "./components/Navigation.vue";
+
+const currentYear = new Date().getFullYear();
 </script>
 
 <template>
   <Navigation />
   <RouterView />
+  <footer class="text-center">
+    Copyright &copy; {{ currentYear }} CollegeFootballData.com
+  </footer>
 </template>
 
 <style scoped></style>
