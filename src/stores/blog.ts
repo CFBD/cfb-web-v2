@@ -32,7 +32,7 @@ export const useBlogStore = defineStore("blog", () => {
         posts.value = blogPosts.map((bp) => ({
           id: bp.id,
           title: bp.title ?? "",
-          excerpt: bp.custom_excerpt ?? "",
+          excerpt: bp.excerpt ?? "",
           href: bp.url ?? "",
           img: bp.feature_image ?? "",
           imgAlt: bp.feature_image_alt ?? "",
