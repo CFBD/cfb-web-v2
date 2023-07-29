@@ -14,18 +14,33 @@ const mainStore = useMainStore();
 </script>
 
 <template>
-  <div class="grid mt-3 ml-3">
+  <div class="grid home-content mt-3 pl-3">
     <main class="col-9">
       <BlogGroup />
     </main>
     <div class="col-3 text-center">
       <div class="mt-3">
         <a href="https://www.patreon.com/bePatron?u=23067681" target="_blank">
-          <Button
-            icon="pi pi-patreon"
-            label="Become a Patron!"
-            severity="danger"
-          ></Button>
+          <Button label="Become a Patron!" severity="danger">
+            <template #icon>
+              <svg
+                class="mr-2"
+                height="15px"
+                width="15px"
+                viewBox="0 -4.5 256 256"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                preserveAspectRatio="xMidYMid"
+              >
+                <g>
+                  <path
+                    d="M45.1355837,0 L45.1355837,246.35001 L0,246.35001 L0,0 L45.1355837,0 Z M163.657111,0 C214.65668,0 256,41.3433196 256,92.3428889 C256,143.342458 214.65668,184.685778 163.657111,184.685778 C112.657542,184.685778 71.3142222,143.342458 71.3142222,92.3428889 C71.3142222,41.3433196 112.657542,0 163.657111,0 Z"
+                  ></path>
+                </g>
+              </svg>
+            </template>
+          </Button>
         </a>
       </div>
       <div class="mt-3">
@@ -48,7 +63,7 @@ const mainStore = useMainStore();
           :src="`https://discord.com/widget?id=578652864793018368&theme=${
             mainStore.darkMode ? 'dark' : 'light'
           }`"
-          width="350"
+          width="300"
           height="500"
           allowtransparency="true"
           frameborder="0"
@@ -58,3 +73,9 @@ const mainStore = useMainStore();
     </div>
   </div>
 </template>
+
+<style scoped>
+.home-content {
+  width: 100%;
+}
+</style>

@@ -15,9 +15,11 @@ export const useNavigationStore = defineStore("navigation", () => {
     return [
       {
         label: "Home",
+        to: "/",
       },
       {
         label: "Data",
+        to: "/exporter",
       },
       {
         label: "Box Scores",
