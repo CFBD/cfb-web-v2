@@ -1,19 +1,12 @@
 <template>
   <div class="text-center">
-    <!-- <div class="text-5xl font-bold mt-2">Data Search</div>
-    <div class="text-lg text-700">What data are you trying to find?</div>
-    <div class="mt-4">
-      <Dropdown
-        v-model="apiStore.selectedEndpoint"
-        :options="apiStore.endpoints"
-        optionLabel="summary"
-        filter
-        :pt="{
-          root: { class: 'w-5' },
-        }"
-      />
-    </div> -->
-    <Fieldset legend="Data Categories" class="text-left m-2" toggleable>
+    <Fieldset
+      legend="Data Categories"
+      class="text-left m-2"
+      :collapsed="apiStore.collapseSelections"
+      @toggle="apiStore.toggleCategories"
+      toggleable
+    >
       <div class="text-center mb-5">
         <InputText
           v-model="apiStore.endpointFilter"
@@ -38,12 +31,17 @@
             }}
           </div>
           <div>
-            <ul>
+            <ul class="endpoint-list">
               <li
                 v-for="endpoint in apiStore.getCategoryEndpoints(category)"
                 :key="endpoint.key"
               >
-                {{ endpoint.summary }}
+                <Button
+                  class="text-left"
+                  @click="apiStore.selectPath(endpoint.key)"
+                  link
+                  >{{ endpoint.summary }}</Button
+                >
               </li>
             </ul>
           </div>
@@ -56,15 +54,32 @@
 <script setup lang="ts">
 import { onBeforeMount } from "vue";
 import { useApiStore } from "@/stores/api";
+import { onBeforeRouteUpdate } from "vue-router";
 
+import Button from "primevue/button";
 import Fieldset from "primevue/fieldset";
 import InputText from "primevue/inputtext";
 
 const apiStore = useApiStore();
 
 onBeforeMount(async () => {
+  apiStore.resetParams();
   await apiStore.getDocs();
+});
+
+onBeforeRouteUpdate((to, from) => {
+  if (from.name !== 'exporter') {
+    apiStore.resetParams();
+  }
+
+  if (to.name === 'exporter') {
+    apiStore.updateParams(to);
+  }
 });
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.endpoint-list {
+  list-style: none;
+}
+</style>

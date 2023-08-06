@@ -1,9 +1,10 @@
 import { computed, ref } from "vue";
 import type { Ref } from "vue";
 import { defineStore } from "pinia";
+import { useRouter, type RouteLocationNormalized } from "vue-router";
 
 import http from "@/helpers/http";
-import type { DropdownChangeEvent } from "primevue/dropdown";
+import type { FieldsetToggleEvent } from "primevue/fieldset";
 
 interface Parameter {
   description: string;
@@ -32,13 +33,16 @@ export interface Endpoint {
 }
 
 export const useApiStore = defineStore("api", () => {
+  const router = useRouter();
+
+  const hyrdating = ref(false);
   const docs = ref();
   const paths: Ref<string[]> = ref([]);
   const categories: Ref<string[]> = ref([]);
   const endpoints: Ref<Endpoint[]> = ref([]);
+  const selectedEndpoint: Ref<Endpoint | null | undefined> = ref(null);
   const endpointFilter = ref("");
-
-  const selectedEndpoint: Ref<Endpoint | null> = ref(null);
+  const collapseSelections = ref(false);
 
   const filteredCategories = computed(() =>
     categories.value.filter((c) => getCategoryEndpoints(c).length > 0)
@@ -57,27 +61,55 @@ export const useApiStore = defineStore("api", () => {
   }
 
   async function getDocs() {
-    const res = await http.get("/api-docs.json");
+    if (docs.value || hyrdating.value) {
+      return;
+    }
 
-    docs.value = res.data;
-    paths.value = Object.keys(res.data.paths);
-    categories.value = Array.from(
-      new Set(paths.value.map((p) => res.data.paths[p].get.tags[0]))
-    );
-    endpoints.value = paths.value
-      .filter((p) => p !== "/games/weather" && p !== "/scoreboard")
-      .map((p) => {
-        return {
-          path: res.data.paths[p],
-          category: res.data.paths[p].get.tags[0],
-          summary: res.data.paths[p].get.summary,
-          key: p,
-        };
-      });
+    try {
+      hyrdating.value = true;
+      const res = await http.get("/api-docs.json");
+
+      docs.value = res.data;
+      paths.value = Object.keys(res.data.paths);
+      categories.value = Array.from(
+        new Set(paths.value.map((p) => res.data.paths[p].get.tags[0]))
+      );
+      endpoints.value = paths.value
+        .filter((p) => p !== "/games/weather" && p !== "/scoreboard")
+        .map((p) => {
+          return {
+            path: res.data.paths[p],
+            category: res.data.paths[p].get.tags[0],
+            summary: res.data.paths[p].get.summary,
+            key: p,
+          };
+        });
+    }
+    finally {
+      hyrdating.value = false;
+    }
   }
 
-  function selectEndpoint(event: DropdownChangeEvent) {
-    selectedEndpoint.value = JSON.parse(JSON.stringify(event.value));
+  function selectPath(path: string) {
+    collapseSelections.value = true;
+    router.replace(`/exporter${path}`);
+  }
+
+  function updatePath(path: string) {
+    selectedEndpoint.value = endpoints.value.find((e) => e.key === path);
+  }
+
+  function toggleCategories(evt: FieldsetToggleEvent) {
+    collapseSelections.value = evt.value;
+  }
+
+  function resetParams() {
+    collapseSelections.value = false;
+    selectedEndpoint.value = null;
+  }
+
+  function updateParams(to: RouteLocationNormalized) {
+    updatePath(`/${to.params.path}`);
   }
 
   return {
@@ -89,7 +121,12 @@ export const useApiStore = defineStore("api", () => {
     endpoints,
     endpointFilter,
     selectedEndpoint,
-    selectEndpoint,
     getCategoryEndpoints,
+    collapseSelections,
+    toggleCategories,
+    selectPath,
+    updatePath,
+    resetParams,
+    updateParams,
   };
 });
