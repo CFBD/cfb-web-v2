@@ -4,7 +4,13 @@ import { defineStore } from "pinia";
 import { useRouter, type RouteLocationNormalized } from "vue-router";
 
 import http from "@/helpers/http";
+import { flattenData } from "@/helpers/data";
 import type { FieldsetToggleEvent } from "primevue/fieldset";
+
+interface ResultField {
+  item: string;
+  name: string;
+}
 
 interface QueryParameters {
   [key: string]: string | boolean | number | null
@@ -49,9 +55,24 @@ export const useApiStore = defineStore("api", () => {
   const endpointFilter = ref("");
   const collapseSelections = ref(false);
 
+  const dataItems = ref([]);
+
   const queryParams: Ref<QueryParameters> = ref({});
 
   const showEndpointForm = computed(() => selectedEndpoint.value ? true : false);
+  const showDataTable = computed(() => dataItems.value && dataItems.value.length);
+  const allFields: Ref<ResultField[]> = computed(() => {
+    if (dataItems.value && dataItems.value.length) {
+      return Object.keys(dataItems.value[0]).map(k => ({
+        item: k,
+        name: k.replace(/^[-_]*(.)/, (_, c) => c.toUpperCase()).replace(/[-_]+(.)/g, (_, c) => ' ' + c.toUpperCase())
+      }));
+    } else {
+      return [];
+    }
+  });
+
+  const displayFields: Ref<ResultField[]> = ref([]);
 
   const filteredCategories = computed(() =>
     categories.value.filter((c) => getCategoryEndpoints(c).length > 0)
@@ -107,6 +128,9 @@ export const useApiStore = defineStore("api", () => {
   function updatePath(path: string) {
     selectedEndpoint.value = endpoints.value.find((e) => e.key === path);
     if (selectedEndpoint.value) {
+      dataItems.value = [];
+      displayFields.value = [];
+
       for (const qp of selectedEndpoint.value.path.get.parameters) {
         let value = qp.default ?? null;
         if (qp.type === "boolean" && value === null) {
@@ -132,6 +156,22 @@ export const useApiStore = defineStore("api", () => {
     updatePath(`/${to.params.path}`);
   }
 
+  function query() {
+    if (selectedEndpoint.value) {
+      http.get(selectedEndpoint.value?.key, {
+        params: queryParams.value
+      }).then((res) => {
+        dataItems.value = flattenData(selectedEndpoint.value?.key, res.data);
+        displayFields.value = allFields.value;
+      })
+    }
+  }
+
+  function toggleColumn(values: ResultField[]) {
+    const items = values.map(v => v.item);
+    displayFields.value = allFields.value.filter(col => items.includes(col.item));
+  }
+
   return {
     docs,
     getDocs,
@@ -142,7 +182,11 @@ export const useApiStore = defineStore("api", () => {
     endpointFilter,
     selectedEndpoint,
     showEndpointForm,
+    showDataTable,
     queryParams,
+    allFields,
+    displayFields,
+    dataItems,
     getCategoryEndpoints,
     collapseSelections,
     toggleCategories,
@@ -150,5 +194,7 @@ export const useApiStore = defineStore("api", () => {
     updatePath,
     resetParams,
     updateParams,
+    query,
+    toggleColumn
   };
 });

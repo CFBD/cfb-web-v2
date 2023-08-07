@@ -27,6 +27,7 @@
       </div>
     </Fieldset>
     <EndpointForm v-if="apiStore.showEndpointForm"></EndpointForm>
+    <DataExporter v-if="apiStore.showDataTable"></DataExporter>
   </div>
 </template>
 
@@ -39,6 +40,7 @@ import Button from "primevue/button";
 import Fieldset from "primevue/fieldset";
 import InputText from "primevue/inputtext";
 
+import DataExporter from "@/components/DataExporter.vue";
 import EndpointForm from "@/components/EndpointForm.vue";
 
 const apiStore = useApiStore();

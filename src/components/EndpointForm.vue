@@ -14,35 +14,43 @@
                             $filters.capitalize(qp.name)
                         }}</label>
                     </div>
-                    <Dropdown v-if="isTeamParameter(qp.name)" :options="mainStore.teams"
+                    <Dropdown v-if="isTeamParameter(qp.name)" :id="`input-${qp.name}`" :options="mainStore.teams"
                         v-model="apiStore.queryParams[qp.name]" option-label="school" option-value="school"
                         :placeholder="qp.description" filter show-clear class="w-10"></Dropdown>
-                    <Dropdown v-else-if="isConferenceParameter(qp.name)" :options="mainStore.conferences"
-                        v-model="apiStore.queryParams[qp.name]" option-label="name" option-value="abbreviation"
-                        :placeholder="qp.description" filter show-clear class="w-10"></Dropdown>
-                    <Dropdown v-else-if="qp.name === 'playType'" :options="mainStore.playTypes"
+                    <Dropdown v-else-if="isConferenceParameter(qp.name)" :id="`input-${qp.name}`"
+                        :options="mainStore.conferences" v-model="apiStore.queryParams[qp.name]" option-label="name"
+                        option-value="abbreviation" :placeholder="qp.description" filter show-clear class="w-10">
+                    </Dropdown>
+                    <Dropdown v-else-if="qp.name === 'playType'" :id="`input-${qp.name}`" :options="mainStore.playTypes"
                         v-model="apiStore.queryParams[qp.name]" option-label="text" option-value="id"
                         :placeholder="qp.description" filter show-clear class="w-10"></Dropdown>
-                    <Dropdown v-else-if="qp.name === 'statTypeId'" :options="mainStore.playStatTypes"
-                        v-model="apiStore.queryParams[qp.name]" option-label="name" option-value="id"
-                        :placeholder="qp.description" filter show-clear class="w-10"></Dropdown>
-                    <Checkbox v-else-if="qp.type === 'boolean'" v-model="apiStore.queryParams[qp.name]" :binary="true">
+                    <Dropdown v-else-if="qp.name === 'statTypeId'" :id="`input-${qp.name}`"
+                        :options="mainStore.playStatTypes" v-model="apiStore.queryParams[qp.name]" option-label="name"
+                        option-value="id" :placeholder="qp.description" filter show-clear class="w-10"></Dropdown>
+                    <Checkbox v-else-if="qp.type === 'boolean'" :id="`input-${qp.name}`"
+                        v-model="apiStore.queryParams[qp.name]" :binary="true">
                     </Checkbox>
-                    <Dropdown v-else-if="qp.name === 'seasonType'" :options="['regular', 'postseason', 'both']"
-                        v-model="apiStore.queryParams[qp.name]" :placeholder="qp.description" class="w-10"></Dropdown>
-                    <InputNumber v-else-if="qp.type === 'number' || qp.type === 'integer'" :placeholder="qp.description //@ts-ignore
-                        " :use-grouping="false" v-model="apiStore.queryParams[qp.name]" class="w-10">
+                    <Dropdown v-else-if="qp.name === 'seasonType'" :id="`input-${qp.name}`"
+                        :options="['regular', 'postseason', 'both']" v-model="apiStore.queryParams[qp.name]"
+                        :placeholder="qp.description" class="w-10"></Dropdown>
+                    <InputNumber v-else-if="qp.type === 'number' || qp.type === 'integer'" :id="`input-${qp.name}`"
+                        :placeholder="qp.description //@ts-ignore
+                            " :use-grouping="false" v-model="apiStore.queryParams[qp.name]" class="w-10">
                     </InputNumber>
-                    <InputText v-else :placeholder="qp.description //@ts-ignore
+                    <InputText v-else :id="`input-${qp.name}`" :placeholder="qp.description //@ts-ignore
                         " v-model="apiStore.queryParams[qp.name]" class="w-10">
                     </InputText>
                 </div>
+            </div>
+            <div class="mt-3">
+                <Button label="Query" @click="apiStore.query"></Button>
             </div>
         </template>
     </Card>
 </template>
 
 <script setup lang="ts">
+import Button from 'primevue/button';
 import Card from 'primevue/card';
 import Checkbox from 'primevue/checkbox';
 import Dropdown from 'primevue/dropdown';
