@@ -6,6 +6,10 @@ import { useRouter, type RouteLocationNormalized } from "vue-router";
 import http from "@/helpers/http";
 import type { FieldsetToggleEvent } from "primevue/fieldset";
 
+interface QueryParameters {
+  [key: string]: string | boolean | number | null
+}
+
 interface Parameter {
   description: string;
   in: string;
@@ -13,6 +17,7 @@ interface Parameter {
   type: string;
   required: boolean;
   currentValue?: string;
+  default?: string | boolean | number;
 }
 
 interface Path {
@@ -43,6 +48,10 @@ export const useApiStore = defineStore("api", () => {
   const selectedEndpoint: Ref<Endpoint | null | undefined> = ref(null);
   const endpointFilter = ref("");
   const collapseSelections = ref(false);
+
+  const queryParams: Ref<QueryParameters> = ref({});
+
+  const showEndpointForm = computed(() => selectedEndpoint.value ? true : false);
 
   const filteredCategories = computed(() =>
     categories.value.filter((c) => getCategoryEndpoints(c).length > 0)
@@ -97,6 +106,16 @@ export const useApiStore = defineStore("api", () => {
 
   function updatePath(path: string) {
     selectedEndpoint.value = endpoints.value.find((e) => e.key === path);
+    if (selectedEndpoint.value) {
+      for (const qp of selectedEndpoint.value.path.get.parameters) {
+        let value = qp.default ?? null;
+        if (qp.type === "boolean" && value === null) {
+          value = false;
+        }
+
+        queryParams.value[qp.name] = value;
+      }
+    }
   }
 
   function toggleCategories(evt: FieldsetToggleEvent) {
@@ -106,6 +125,7 @@ export const useApiStore = defineStore("api", () => {
   function resetParams() {
     collapseSelections.value = false;
     selectedEndpoint.value = null;
+    queryParams.value = {};
   }
 
   function updateParams(to: RouteLocationNormalized) {
@@ -121,6 +141,8 @@ export const useApiStore = defineStore("api", () => {
     endpoints,
     endpointFilter,
     selectedEndpoint,
+    showEndpointForm,
+    queryParams,
     getCategoryEndpoints,
     collapseSelections,
     toggleCategories,
