@@ -4,8 +4,8 @@
             Data View
         </template>
         <template #content>
-            <DataTable :value="apiStore.dataItems" paginator :rows="10" :rowsPerPageOptions="[10, 25, 50, 100]"
-                class="p-datatable-small">
+            <DataTable :value="apiStore.dataItems" lazy paginator :loading="apiStore.loadingData" :rows="10"
+                :rowsPerPageOptions="[10, 25, 50, 100]" class="p-datatable-small">
                 <template #header>
                     <div style="text-align:left">
                         <MultiSelect :modelValue="apiStore.displayFields" :options="apiStore.allFields" optionLabel="name"

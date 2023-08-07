@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import ExportView from "../views/ExportView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,7 +13,7 @@ const router = createRouter({
     {
       path: "/exporter/:path([\\w\\/]+)?",
       name: "exporter",
-      component: () => import("../views/ExportView.vue"),
+      component: ExportView,
       props: true,
     },
     {

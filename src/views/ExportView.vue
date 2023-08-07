@@ -46,8 +46,8 @@ import EndpointForm from "@/components/EndpointForm.vue";
 const apiStore = useApiStore();
 
 onBeforeMount(async () => {
-  apiStore.resetParams();
   await apiStore.getDocs();
+  apiStore.resetParams();
 });
 
 onBeforeRouteUpdate((to, from) => {

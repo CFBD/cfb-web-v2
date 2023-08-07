@@ -1,7 +1,7 @@
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import type { Ref } from "vue";
 import { defineStore } from "pinia";
-import { useRouter, type RouteLocationNormalized } from "vue-router";
+import { useRouter, type RouteLocationNormalized, type RouteQueryAndHash } from "vue-router";
 
 import http from "@/helpers/http";
 import { flattenData } from "@/helpers/data";
@@ -54,13 +54,14 @@ export const useApiStore = defineStore("api", () => {
   const selectedEndpoint: Ref<Endpoint | null | undefined> = ref(null);
   const endpointFilter = ref("");
   const collapseSelections = ref(false);
+  const loadingData = ref(false);
 
   const dataItems = ref([]);
 
   const queryParams: Ref<QueryParameters> = ref({});
 
   const showEndpointForm = computed(() => selectedEndpoint.value ? true : false);
-  const showDataTable = computed(() => dataItems.value && dataItems.value.length);
+  const showDataTable = computed(() => loadingData.value || (dataItems.value && dataItems.value.length));
   const allFields: Ref<ResultField[]> = computed(() => {
     if (dataItems.value && dataItems.value.length) {
       return Object.keys(dataItems.value[0]).map(k => ({
@@ -126,18 +127,27 @@ export const useApiStore = defineStore("api", () => {
   }
 
   function updatePath(path: string) {
+    dataItems.value = [];
+    displayFields.value = [];
     selectedEndpoint.value = endpoints.value.find((e) => e.key === path);
+
     if (selectedEndpoint.value) {
-      dataItems.value = [];
-      displayFields.value = [];
+      collapseSelections.value = true;
 
       for (const qp of selectedEndpoint.value.path.get.parameters) {
         let value = qp.default ?? null;
+
+        if (Object.keys(router.currentRoute.value.query).map(q => q.toLowerCase()).includes(qp.name)) {
+          value = router.currentRoute.value.query[qp.name]?.toString() ?? null;
+        }
+
         if (qp.type === "boolean" && value === null) {
           value = false;
         }
 
-        queryParams.value[qp.name] = value;
+        if (!queryParams.value[qp.name]) {
+          queryParams.value[qp.name] = value;
+        }
       }
     }
   }
@@ -150,19 +160,40 @@ export const useApiStore = defineStore("api", () => {
     collapseSelections.value = false;
     selectedEndpoint.value = null;
     queryParams.value = {};
+    dataItems.value = [];
+    displayFields.value = [];
+
+    const subpath = router.currentRoute.value.path.replace("/exporter", "");
+    if (subpath && subpath !== "") {
+      updatePath(subpath);
+    }
   }
 
   function updateParams(to: RouteLocationNormalized) {
     updatePath(`/${to.params.path}`);
   }
 
+  function updateQueryParams() {
+    const o = Object.keys(queryParams.value)
+      .filter((k) => queryParams.value[k] != null)
+      .reduce((a, k) => ({ ...a, [k]: queryParams.value[k] }), {});
+
+    router.push({ path: router.currentRoute.value.path, query: o });
+  }
+
   function query() {
     if (selectedEndpoint.value) {
+      loadingData.value = true;
+      updateQueryParams();
+
       http.get(selectedEndpoint.value?.key, {
         params: queryParams.value
       }).then((res) => {
         dataItems.value = flattenData(selectedEndpoint.value?.key, res.data);
         displayFields.value = allFields.value;
+        loadingData.value = false;
+      }).finally(() => {
+        loadingData.value = false;
       })
     }
   }
@@ -187,6 +218,7 @@ export const useApiStore = defineStore("api", () => {
     allFields,
     displayFields,
     dataItems,
+    loadingData,
     getCategoryEndpoints,
     collapseSelections,
     toggleCategories,
