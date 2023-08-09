@@ -1,7 +1,7 @@
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
 import type { Ref } from "vue";
 import { defineStore } from "pinia";
-import { useRouter, type RouteLocationNormalized, type RouteQueryAndHash } from "vue-router";
+import { useRouter, type RouteLocationNormalized } from "vue-router";
 
 import http from "@/helpers/http";
 import { flattenData } from "@/helpers/data";
