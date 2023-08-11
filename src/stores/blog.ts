@@ -19,7 +19,7 @@ export const useBlogStore = defineStore("blog", () => {
   async function getPosts() {
     const api = new GhostContentAPI({
       url: "https://blog.collegefootballdata.com",
-      key: "3d654ae56e824a1b9001763e9e",
+      key: "027d8b9823dfc75ab0c1b9c2ca",
       version: "v2",
     });
 

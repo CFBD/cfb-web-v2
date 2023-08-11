@@ -17,6 +17,11 @@ const router = createRouter({
       props: true,
     },
     {
+      path: "/metrics/season",
+      name: "seasonMetrics",
+      component: () => import("../views/TeamMetricsView.vue"),
+    },
+    {
       path: "/about",
       name: "about",
       // route level code-splitting

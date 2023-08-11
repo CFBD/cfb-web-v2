@@ -45,6 +45,9 @@ export const useMainStore = defineStore("main", () => {
   const playTypes: Ref<PlayType[]> = ref([]);
   const playStatTypes: Ref<PlayStatType[]> = ref([]);
 
+  const yearRanges = ref([2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]);
+  const defaultYear = ref(2022);
+
   async function getTeams() {
     const res = await http.get("/teams");
     teams.value = res.data;
@@ -75,7 +78,7 @@ export const useMainStore = defineStore("main", () => {
       "bootstrap4-light-blue",
       "theme-link",
       // eslint-disable-next-line @typescript-eslint/no-empty-function
-      () => {}
+      () => { }
     );
   }
 
@@ -88,7 +91,7 @@ export const useMainStore = defineStore("main", () => {
       `bootstrap4-${darkMode.value ? "dark" : "light"}-blue`,
       "theme-link",
       // eslint-disable-next-line @typescript-eslint/no-empty-function
-      () => {}
+      () => { }
     );
   };
 
@@ -114,5 +117,7 @@ export const useMainStore = defineStore("main", () => {
     conferences,
     playTypes,
     playStatTypes,
+    yearRanges,
+    defaultYear
   };
 });
