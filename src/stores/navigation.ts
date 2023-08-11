@@ -29,6 +29,7 @@ export const useNavigationStore = defineStore("navigation", () => {
         items: [
           {
             label: "Team Metrics",
+            to: "/metrics/season"
           },
           {
             label: "Passing Trends",
