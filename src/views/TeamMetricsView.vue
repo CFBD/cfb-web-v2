@@ -37,7 +37,9 @@
             <div class="formgrid grid mt-3 justify-content-center">
                 <div class="field col-12 sm:col-6 lg:col-3">
                     <label>Conference Filter</label>
-                    <Dropdown v-model="conference" :options="conferences" class="w-full" @change="reloadData"></Dropdown>
+                    <Dropdown v-model="conference" :options="mainStore.fbsConferences" optionLabel="text"
+                        optionValue="value" class="w-full" @change="reloadData">
+                    </Dropdown>
                 </div>
             </div>
             <div class="formgrid grid mt-3 justify-content-center">
@@ -73,21 +75,6 @@ import { useMainStore } from "@/stores/main";
 const mainStore = useMainStore();
 
 import http from '@/helpers/http';
-
-const conferences = ref([
-    "All",
-    "ACC",
-    "American Athletic",
-    "Big 12",
-    "Big Ten",
-    "Conference USA",
-    "FBS Independents",
-    "Mid-American",
-    "Mountain West",
-    "Pac-12",
-    "SEC",
-    "Sun Belt"
-]);
 
 const statTypes = ref([{
     value: 'offense',

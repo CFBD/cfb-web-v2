@@ -27,6 +27,11 @@ const router = createRouter({
       component: () => import("../views/PassingTrendsView.vue"),
     },
     {
+      path: "/ppa/usage",
+      name: "playerEfficiency",
+      component: () => import("../views/PlayerEfficiencyView.vue"),
+    },
+    {
       path: "/about",
       name: "about",
       // route level code-splitting

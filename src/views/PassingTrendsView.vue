@@ -10,8 +10,7 @@
             <div class="formgrid grid justify-content-center">
                 <div class="field col-12 sm:col-6 lg:col-3">
                     <label>Year</label>
-                    <InputNumber v-model="year" :min="2015" :max="2023" :use-grouping="false" class="w-full"
-                        @update:model-value="resetData"></InputNumber>
+                    <Dropdown v-model="year" :options="mainStore.yearRanges" class="w-full" @change="resetData"></Dropdown>
                 </div>
                 <div class="field col-12 sm:col-6 lg:col-3">
                     <label>Rolling Plays</label>
@@ -44,6 +43,7 @@ import Card from 'primevue/card';
 import Chart from 'primevue/chart';
 import Chip from 'primevue/chip';
 import Divider from 'primevue/divider';
+import Dropdown from 'primevue/dropdown';
 import InputNumber from 'primevue/inputnumber';
 import PlayerSearch from '@/components/PlayerSearch.vue';
 
@@ -51,7 +51,10 @@ import { ref, type Ref } from 'vue';
 
 import http from '@/helpers/http';
 
-const year = ref(2022);
+import { useMainStore } from '@/stores/main';
+const mainStore = useMainStore();
+
+const year = ref(mainStore.defaultYear);
 const rollingPlays: Ref<number | null> = ref(null);
 const players: Ref<{ id: number, displayName: string, teamColor: string }[]> = ref([]);
 
@@ -73,9 +76,13 @@ const chartData = ref({
     datasets: []
 });
 const chartOptions = ref({
-    title: {
-        display: true,
-        text: 'Cumulative Mean Passing PPA'
+    plugins: {
+        options: {
+            title: {
+                display: true,
+                text: 'Cumulative Mean Passing PPA'
+            },
+        }
     },
     scales: {
         y: {

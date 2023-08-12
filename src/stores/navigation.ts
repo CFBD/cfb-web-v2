@@ -37,6 +37,7 @@ export const useNavigationStore = defineStore("navigation", () => {
           },
           {
             label: "Player Efficiency",
+            to: "/ppa/usage"
           },
           {
             label: "Historical Matchups",

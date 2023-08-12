@@ -48,6 +48,57 @@ export const useMainStore = defineStore("main", () => {
   const yearRanges = ref([2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]);
   const defaultYear = ref(2022);
 
+  const fbsConferences = ref([
+    {
+      value: "All",
+      text: "All"
+    },
+    {
+      value: "ACC",
+      text: "ACC"
+    },
+    {
+      value: "AAC",
+      text: "American Athletic"
+    },
+    {
+      value: "B12",
+      text: "Big 12"
+    },
+    {
+      value: "B1G",
+      text: "Big Ten"
+    },
+    {
+      value: "CUSA",
+      text: "Conference USA"
+    },
+    {
+      value: "Ind",
+      text: "FBS Independents"
+    },
+    {
+      value: "MAC",
+      text: "Mid-American"
+    },
+    {
+      value: "Mountain West",
+      text: "MWC"
+    },
+    {
+      value: "PAC",
+      text: "Pac-12"
+    },
+    {
+      value: "SEC",
+      text: "SEC"
+    },
+    {
+      value: "SBC",
+      text: "Sun Belt"
+    }
+  ]);
+
   async function getTeams() {
     const res = await http.get("/teams");
     teams.value = res.data;
@@ -118,6 +169,7 @@ export const useMainStore = defineStore("main", () => {
     playTypes,
     playStatTypes,
     yearRanges,
-    defaultYear
+    defaultYear,
+    fbsConferences
   };
 });
