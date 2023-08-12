@@ -22,6 +22,11 @@ const router = createRouter({
       component: () => import("../views/TeamMetricsView.vue"),
     },
     {
+      path: '/ppa/passing/cumulative',
+      name: 'passingTrends',
+      component: () => import("../views/PassingTrendsView.vue"),
+    },
+    {
       path: "/about",
       name: "about",
       // route level code-splitting

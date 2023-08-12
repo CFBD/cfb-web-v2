@@ -52,7 +52,7 @@
                         @change="refreshData"></InputNumber>
                 </div>
             </div>
-            <hr />
+            <Divider></Divider>
             <div class="grid justify-content-center pt-5">
                 <Chart type="scatter" :data="chartData" :options="chartOptions" class="w-10"></Chart>
             </div>
@@ -63,6 +63,7 @@
 <script setup lang="ts">
 import Card from 'primevue/card';
 import Chart from 'primevue/chart';
+import Divider from 'primevue/divider';
 import Dropdown from 'primevue/dropdown';
 import InputNumber from 'primevue/inputnumber';
 

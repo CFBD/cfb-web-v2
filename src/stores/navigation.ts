@@ -29,10 +29,11 @@ export const useNavigationStore = defineStore("navigation", () => {
         items: [
           {
             label: "Team Metrics",
-            to: "/metrics/season"
+            to: "/metrics/season",
           },
           {
             label: "Passing Trends",
+            to: "/ppa/passing/cumulative",
           },
           {
             label: "Player Efficiency",

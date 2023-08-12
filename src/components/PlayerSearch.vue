@@ -1,7 +1,8 @@
 <template>
     <div class="w-full justify-content-center">
         <div>
-            <InputText class="w-10" v-model="searchTerm" @focus="isTyping = true" @blur="onBlur" @input="queryPlayers">
+            <InputText class="w-10" v-model="searchTerm" :placeholder="placeholder" @focus="isTyping = true" @blur="onBlur"
+                @input="queryPlayers">
             </InputText>
         </div>
         <div class="flex justify-content-center player-suggestions-container">
@@ -30,7 +31,9 @@ const props = defineProps({
     position: String,
     school: String,
     year: Number,
-    showTeam: Boolean
+    showTeam: Boolean,
+    clearOnSelection: Boolean,
+    placeholder: String,
 });
 
 const emit = defineEmits(["update:modelValue", "selection"]);
@@ -45,10 +48,14 @@ const showSuggestions = computed(() => isTyping.value || isChanging.value);
 
 const selectPlayer = (event: ListboxChangeEvent) => {
     isChanging.value = true;
-    searchTerm.value = event.value?.name;
+    searchTerm.value = props.clearOnSelection ? "" : event.value?.name;
     selectedPlayerId.value = event.value?.id;
     emit("update:modelValue", event.value?.id);
     emit("selection", event.value);
+    if (props.clearOnSelection) {
+        selectedPlayerId.value = null;
+        players.value = [];
+    }
     isChanging.value = false;
 }
 

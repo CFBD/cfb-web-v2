@@ -28,7 +28,7 @@
                         :options="mainStore.playStatTypes" v-model="apiStore.queryParams[qp.name]" option-label="name"
                         option-value="id" :placeholder="qp.description" filter show-clear class="w-10"></Dropdown>
                     <PlayerSearch v-else-if="qp.name == 'athleteId' || qp.name == 'playerId'" :placeholder="qp.description //@ts-ignore
-                        " v-model="apiStore.queryParams[qp.name]">
+                        " v-model="apiStore.queryParams[qp.name]" show-team>
                     </PlayerSearch>
                     <Checkbox v-else-if="qp.type === 'boolean'" :id="`input-${qp.name}`"
                         v-model="apiStore.queryParams[qp.name]" :binary="true">
