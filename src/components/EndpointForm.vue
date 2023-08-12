@@ -27,6 +27,9 @@
                     <Dropdown v-else-if="qp.name === 'statTypeId'" :id="`input-${qp.name}`"
                         :options="mainStore.playStatTypes" v-model="apiStore.queryParams[qp.name]" option-label="name"
                         option-value="id" :placeholder="qp.description" filter show-clear class="w-10"></Dropdown>
+                    <PlayerSearch v-else-if="qp.name == 'athleteId' || qp.name == 'playerId'" :placeholder="qp.description //@ts-ignore
+                        " v-model="apiStore.queryParams[qp.name]">
+                    </PlayerSearch>
                     <Checkbox v-else-if="qp.type === 'boolean'" :id="`input-${qp.name}`"
                         v-model="apiStore.queryParams[qp.name]" :binary="true">
                     </Checkbox>
@@ -56,6 +59,7 @@ import Checkbox from 'primevue/checkbox';
 import Dropdown from 'primevue/dropdown';
 import InputNumber from 'primevue/inputnumber';
 import InputText from 'primevue/inputtext';
+import PlayerSearch from './PlayerSearch.vue';
 import { useApiStore } from '@/stores/api';
 import { useMainStore } from '@/stores/main';
 
