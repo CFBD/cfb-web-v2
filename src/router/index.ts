@@ -17,6 +17,11 @@ const router = createRouter({
       props: true,
     },
     {
+      path: '/wp/:id(\\d+)?',
+      name: 'wp',
+      component: () => import("../views/WinProbabilityView.vue"),
+    },
+    {
       path: "/metrics/season",
       name: "seasonMetrics",
       component: () => import("../views/TeamMetricsView.vue"),

@@ -77,12 +77,10 @@ const chartData = ref({
 });
 const chartOptions = ref({
     plugins: {
-        options: {
-            title: {
-                display: true,
-                text: 'Cumulative Mean Passing PPA'
-            },
-        }
+        title: {
+            display: true,
+            text: 'Cumulative Mean Passing PPA'
+        },
     },
     scales: {
         y: {

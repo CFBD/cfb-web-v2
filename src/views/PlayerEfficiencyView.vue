@@ -33,8 +33,7 @@
             <Divider></Divider>
             <div class="grid justify-content-center pt-5">
                 <ProgressSpinner v-if="loading"></ProgressSpinner>
-                <Chart v-else type="scatter" :data="scatterData" :options="scatterOptions" class="w-10"
-                    @change="reloadData">
+                <Chart v-else type="scatter" :data="scatterData" :options="scatterOptions" class="w-10">
                 </Chart>
             </div>
         </template>

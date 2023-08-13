@@ -99,7 +99,18 @@ export const useMainStore = defineStore("main", () => {
     }
   ]);
 
-  async function getTeams() {
+  const seasonTypes = ref([
+    {
+      value: "regular",
+      text: "Regular"
+    },
+    {
+      value: "postseason",
+      text: "Postseason"
+    },
+  ]);
+
+  async function loadTeams() {
     const res = await http.get("/teams");
     teams.value = res.data;
   }
@@ -150,7 +161,7 @@ export const useMainStore = defineStore("main", () => {
     if (!isHydrating.value) {
       isHydrating.value = true;
       await Promise.all([
-        getTeams(),
+        loadTeams(),
         getConferences(),
         getPlayTypes(),
         getPlayStatTypes(),
@@ -162,6 +173,7 @@ export const useMainStore = defineStore("main", () => {
   return {
     isHydrating,
     hyrdate,
+    loadTeams,
     darkMode,
     toggleDarkMode,
     teams,
@@ -170,6 +182,7 @@ export const useMainStore = defineStore("main", () => {
     playStatTypes,
     yearRanges,
     defaultYear,
-    fbsConferences
+    fbsConferences,
+    seasonTypes
   };
 });

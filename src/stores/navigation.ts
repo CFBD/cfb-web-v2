@@ -28,6 +28,10 @@ export const useNavigationStore = defineStore("navigation", () => {
         label: "Charts",
         items: [
           {
+            label: "Win Probability",
+            to: "/wp"
+          },
+          {
             label: "Team Metrics",
             to: "/metrics/season",
           },
