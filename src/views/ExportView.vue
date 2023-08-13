@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <Fieldset legend="Data Categories" class="text-left m-2" :collapsed="apiStore.collapseSelections"
+    <Fieldset legend="Data Categories" class="text-left m-3" :collapsed="apiStore.collapseSelections"
       @toggle="apiStore.toggleCategories" toggleable>
       <div class="text-center mb-5">
         <InputText v-model="apiStore.endpointFilter" placeholder="Start typing to filter categories" size="large"
@@ -9,7 +9,7 @@
           }" />
       </div>
       <div class="grid">
-        <div class="col-3" v-for="category in apiStore.filteredCategories" :key="category">
+        <div class="col-12 md:col-6 lg:col-3" v-for="category in apiStore.filteredCategories" :key="category">
           <div class="text-lg font-bold">
             {{
               //@ts-ignore

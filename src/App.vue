@@ -14,7 +14,7 @@ onBeforeMount(async () => {
 
 <template>
   <Navigation />
-  <RouterView />
+  <RouterView class="router-content" />
   <footer class="text-center p-2">
     <hr />
     Copyright &copy; {{ currentYear }} CollegeFootballData.com

@@ -1,5 +1,5 @@
 <template>
-    <Card class="m-2">
+    <Card class="m-3">
         <template #header>
             Data View
         </template>

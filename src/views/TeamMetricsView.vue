@@ -1,5 +1,5 @@
 <template>
-    <Card class="text-center m-2">
+    <Card class="text-center m-3">
         <template #title>
             Team Metrics
         </template>

@@ -1,7 +1,7 @@
 <!-- ts-nocheck -->
 
 <template>
-    <Card class="m-2">
+    <Card class="m-3">
         <template #header>
             {{ apiStore.selectedEndpoint?.summary }}
         </template>

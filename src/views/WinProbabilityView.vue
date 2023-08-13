@@ -1,5 +1,5 @@
 <template>
-    <Card class="text-center m-2">
+    <Card class="text-center m-3">
         <template #title>
             Predicted Win Probability
         </template>
@@ -7,7 +7,7 @@
             Select a game to generate predicted win probabilities.
         </template>
         <template #content>
-            <GameSearch v-model="gameId" clearOnSelection @selection="updateData"></GameSearch>
+            <GameSearch v-model="gameId" @selection="updateData"></GameSearch>
             <Divider></Divider>
             <div class="grid justify-content-center pt-5">
                 <Chart type="line" :options="chartOptions" :data="chartData" class="w-10"></Chart>
