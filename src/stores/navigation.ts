@@ -48,6 +48,7 @@ export const useNavigationStore = defineStore("navigation", () => {
           },
           {
             label: "Predicted Points",
+            to: "/predictedpoints"
           },
           {
             label: "SP+ Team Trends",

@@ -42,6 +42,11 @@ const router = createRouter({
       component: () => import("../views/SPTeamTrendsView.vue")
     },
     {
+      path: "/predictedpoints",
+      name: "predictedPoints",
+      component: () => import("../views/PredictedPointsView.vue")
+    },
+    {
       path: "/about",
       name: "about",
       // route level code-splitting

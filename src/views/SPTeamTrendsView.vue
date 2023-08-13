@@ -52,7 +52,6 @@ import Dropdown from 'primevue/dropdown';
 import http from "@/helpers/http";
 
 import { useMainStore } from '@/stores/main';
-import type { TooltipCallbacks } from 'chart.js';
 const mainStore = useMainStore();
 
 const datapoints = ref([{
