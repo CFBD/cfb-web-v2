@@ -50,18 +50,8 @@ export const useNavigationStore = defineStore("navigation", () => {
             label: "Predicted Points",
           },
           {
-            label: "SP+",
-            items: [
-              {
-                label: "SP+",
-              },
-              {
-                label: "SP+ Team Trends",
-              },
-              {
-                label: "SP+ and Recruiting",
-              },
-            ],
+            label: "SP+ Team Trends",
+            to: "/sp/trends"
           },
         ],
       },
@@ -70,6 +60,8 @@ export const useNavigationStore = defineStore("navigation", () => {
         items: [
           {
             label: "Docs",
+            url: "https://api.collegefootballdata.com",
+            target: "_blank"
           },
           {
             label: "API Keys",
@@ -80,12 +72,18 @@ export const useNavigationStore = defineStore("navigation", () => {
           },
           {
             label: "Python",
+            url: "https://pypi.org/project/cfbd/",
+            target: "_blank"
           },
           {
             label: "JavaScript",
+            url: "https://www.npmjs.com/package/cfb.js",
+            target: "_blank"
           },
           {
             label: "C#",
+            url: "https://www.nuget.org/packages/CFBSharp/",
+            target: "_blank"
           },
         ],
       },
