@@ -39,12 +39,22 @@ const router = createRouter({
     {
       path: "/sp/trends",
       name: "spTrends",
-      component: () => import("../views/SPTeamTrendsView.vue")
+      component: () => import("../views/SPTeamTrendsView.vue"),
     },
     {
       path: "/predictedpoints",
       name: "predictedPoints",
-      component: () => import("../views/PredictedPointsView.vue")
+      component: () => import("../views/PredictedPointsView.vue"),
+    },
+    {
+      path: "/matchup",
+      name: "matchup",
+      component: () => import("../views/MatchupView.vue"),
+    },
+    {
+      path: "/boxscore/:id(\\d+)?",
+      name: "boxscore",
+      component: () => import("../views/BoxScoreView.vue"),
     },
     {
       path: "/about",

@@ -22,7 +22,11 @@ export const useNavigationStore = defineStore("navigation", () => {
         to: "/exporter",
       },
       {
+        label: "Teams",
+      },
+      {
         label: "Box Scores",
+        to: "/boxscore",
       },
       {
         label: "Charts",
@@ -45,6 +49,7 @@ export const useNavigationStore = defineStore("navigation", () => {
           },
           {
             label: "Historical Matchups",
+            to: "/matchup"
           },
           {
             label: "Predicted Points",
