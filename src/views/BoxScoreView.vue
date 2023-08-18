@@ -11,17 +11,17 @@
             <Divider v-if="boxScoreData"></Divider>
             <div v-if="boxScoreData">
                 <h2>{{ formattedScore() }}</h2>
-                <h4 class="text-400">Note: Garbage time is filtered from these stats</h4>
+                <h4 class="text-500">Note: Garbage time is filtered from these stats</h4>
                 <div class="grid">
                     <div class="col-12" :class="{ 'md:col-6': hasPlayerData, 'divider-right': hasPlayerData }">
                         <h3>Team Metrics</h3>
                         <Divider></Divider>
                         <div class="grid">
-                            <div class="col-6">
+                            <div class="col-6" v-tooltip="getTooltip('winExpectancy')">
                                 <div class="font-bold text-lg">Postgame Win Expectancy</div>
                                 {{ winExpectancy }}
                             </div>
-                            <div class="col-6">
+                            <div class="col-6" v-tooltip="getTooltip('excitementIndex')">
                                 <div class="font-bold text-lg">Excitement Index</div>
                                 {{ (Math.round(boxScoreData.gameInfo.excitement * 10) / 10) }}
                             </div>
@@ -30,7 +30,8 @@
                         <div class="font-bold text-lg m-3">
                             Scoring Opportunities
                         </div>
-                        <DataTable :value="oppsTable" :rows="3" class="p-datatable-small">
+                        <DataTable :value="oppsTable" :rows="3" class="p-datatable-small"
+                            v-tooltip="getTooltip('opportunities')">
                             <Column field="label" header=""></Column>
                             <Column field="homeValue" :header="boxScoreData.gameInfo.homeTeam" class="text-center"
                                 headerClass="center-header">
@@ -53,7 +54,8 @@
                         <div class="font-bold text-lg m-3">
                             Field Position
                         </div>
-                        <DataTable :value="fieldPositionTable" :rows="2" class="p-datatable-small">
+                        <DataTable :value="fieldPositionTable" :rows="2" class="p-datatable-small"
+                            v-tooltip="getTooltip('fieldPosition')">
                             <Column field="label" header=""></Column>
                             <Column field="homeValue" :header="boxScoreData.gameInfo.homeTeam" class="text-center"
                                 headerClass="center-header">
@@ -76,7 +78,8 @@
                         <div class="font-bold text-lg m-3">
                             Rushing
                         </div>
-                        <DataTable :value="rushingMetrics" :rows="8" class="p-datatable-small">
+                        <DataTable :value="rushingMetrics" :rows="8" class="p-datatable-small"
+                            v-tooltip="getTooltip('rushing')">
                             <Column field="label" header=""></Column>
                             <Column field="homeValue" :header="boxScoreData.gameInfo.homeTeam" class="text-center"
                                 headerClass="center-header">
@@ -99,7 +102,8 @@
                         <div class="font-bold text-lg m-3">
                             Defensive Havoc
                         </div>
-                        <DataTable :value="havocMetrics" :rows="3" class="p-datatable-small">
+                        <DataTable :value="havocMetrics" :rows="3" class="p-datatable-small"
+                            v-tooltip="getTooltip('havoc')">
                             <Column field="label" header=""></Column>
                             <Column field="homeValue" :header="boxScoreData.gameInfo.homeTeam" class="text-center"
                                 headerClass="center-header">
@@ -125,7 +129,8 @@
                             Predicted Points Added
                         </div>
                         <div class="mb-2 mt-3">Overall</div>
-                        <DataTable :value="boxScoreData.teams.ppa" :rows="2" class="p-datatable-small">
+                        <DataTable :value="boxScoreData.teams.ppa" :rows="2" class="p-datatable-small"
+                            v-tooltip="getTooltip('ppa')">
                             <Column field="team" label="Team"></Column>
                             <Column v-for="i in [1, 2, 3, 4]" :key="i" :field="`overall.quarter${i}`" :header="`${i}`"
                                 class="text-center" headerClass="center-header">
@@ -144,7 +149,8 @@
                             </Column>
                         </DataTable>
                         <div class="mb-2 mt-3">Passing</div>
-                        <DataTable :value="boxScoreData.teams.ppa" :rows="2" class="p-datatable-small">
+                        <DataTable :value="boxScoreData.teams.ppa" :rows="2" class="p-datatable-small"
+                            v-tooltip="getTooltip('ppa')">
                             <Column field="team" label="Team"></Column>
                             <Column v-for="i in [1, 2, 3, 4]" :key="i" :field="`passing.quarter${i}`" :header="`${i}`"
                                 class="text-center" headerClass="center-header">
@@ -163,7 +169,8 @@
                             </Column>
                         </DataTable>
                         <div class="mb-2 mt-3">Rushing</div>
-                        <DataTable :value="boxScoreData.teams.ppa" :rows="2" class="p-datatable-small">
+                        <DataTable :value="boxScoreData.teams.ppa" :rows="2" class="p-datatable-small"
+                            v-tooltip="getTooltip('ppa')">
                             <Column field="team" label="Team"></Column>
                             <Column v-for="i in [1, 2, 3, 4]" :key="i" :field="`rushing.quarter${i}`" :header="`${i}`"
                                 class="text-center" headerClass="center-header">
@@ -186,7 +193,8 @@
                             Success Rate
                         </div>
                         <div class="mb-2 mt-3">Overall</div>
-                        <DataTable :value="boxScoreData.teams.successRates" :rows="2" class="p-datatable-small">
+                        <DataTable :value="boxScoreData.teams.successRates" :rows="2" class="p-datatable-small"
+                            v-tooltip="getTooltip('success')">
                             <Column field="team" label="Team"></Column>
                             <Column v-for="i in [1, 2, 3, 4]" :key="i" :field="`overall.quarter${i}`" :header="`${i}`"
                                 class="text-center" headerClass="center-header">
@@ -206,7 +214,8 @@
                             </Column>
                         </DataTable>
                         <div class="mb-2 mt-3">Standard Downs</div>
-                        <DataTable :value="boxScoreData.teams.successRates" :rows="2" class="p-datatable-small">
+                        <DataTable :value="boxScoreData.teams.successRates" :rows="2" class="p-datatable-small"
+                            v-tooltip="getTooltip('success')">
                             <Column field="team" label="Team"></Column>
                             <Column v-for="i in [1, 2, 3, 4]" :key="i" :field="`standardDowns.quarter${i}`" :header="`${i}`"
                                 class="text-center" headerClass="center-header">
@@ -228,7 +237,8 @@
                             </Column>
                         </DataTable>
                         <div class="mb-2 mt-3">Passing Downs</div>
-                        <DataTable :value="boxScoreData.teams.successRates" :rows="2" class="p-datatable-small">
+                        <DataTable :value="boxScoreData.teams.successRates" :rows="2" class="p-datatable-small"
+                            v-tooltip="getTooltip('success')">
                             <Column field="team" label="Team"></Column>
                             <Column v-for="i in [1, 2, 3, 4]" :key="i" :field="`passingDowns.quarter${i}`" :header="`${i}`"
                                 class="text-center" headerClass="center-header">
@@ -253,7 +263,8 @@
                         <div class="font-bold text-lg m-3">
                             Explosiveness
                         </div>
-                        <DataTable :value="boxScoreData.teams.explosiveness" :rows="2" class="p-datatable-small">
+                        <DataTable :value="boxScoreData.teams.explosiveness" :rows="2" class="p-datatable-small"
+                            v-tooltip="getTooltip('explosiveness')">
                             <Column field="team" label="Team"></Column>
                             <Column v-for="i in [1, 2, 3, 4]" :key="i" :field="`overall.quarter${i}`" :header="`${i}`"
                                 class="text-center" headerClass="center-header">
@@ -504,9 +515,67 @@ const havocMetrics = computed(() => {
     }]
 });
 
+const getTooltip = (key: string) => {
+    const tooltip = tooltips[key];
+    const html = `<div class="font-bold text-lg text-center">${tooltip.title}</div><hr /><div class="text-sm">${tooltip.content}</div>`;
+
+    return {
+        value: html,
+        escape: true,
+        class: "boxscore-tooltip"
+    };
+};
+
+const tooltips: Record<string, { title: string, content: string }> = {
+    winExpectancy: {
+        title: 'Win Expectancy',
+        content: 'Measures the win expectancy if the game were to be played again with each team attaining the same stats'
+    },
+    excitementIndex: {
+        title: 'Excitement Index',
+        content: 'Measures the overall excitement of the game based on swings in in-game win probability. An average game scores around 4.0. There is no upper limit on score, but more exciting games will generally finish at 6.0 or higher.'
+    },
+    opportunities: {
+        title: 'Scoring Opportunities',
+        content: 'Analyzes drives in which the offense advanced the ball to out past the opponent\'s 40 yard line'
+    },
+    fieldPosition: {
+        title: 'Field Position',
+        content: 'Average starting field position in number of yards from opponent\'s goal line as well as average starting expected points'
+    },
+    rushing: {
+        title: 'Rushing',
+        content: 'Various rushing based metrics, some of which attempt to measure the effectiveness of the offensive line while others measure the performance of the team\'s backs'
+    },
+    havoc: {
+        title: 'Havoc',
+        content: 'Measures the percentage of plays in which the defensive generated a havoc event, such as a TFL, pass deflection, or turnover'
+    },
+    ppa: {
+        title: 'Predicted Points Added',
+        content: 'EPA metric that measures expected points added on an average play'
+    },
+    success: {
+        title: 'Success Rate',
+        content: 'A play is considered to by successful if it is a first down and at least 50% of yards to go are attained, or if it is 2nd down and at least 70% or yards to go are attained, or if it is a 3rd or 4th down that is converted for a first down or score'
+    },
+    explosiveness: {
+        title: 'Explosiveness',
+        content: 'Explosiveness measures the average expected points added on successful plays'
+    },
+    usage: {
+        title: 'Usage',
+        content: 'Usage measures the percentage of plays in which a player was involved, such as as a passer, a rusher, or a receiving target'
+    },
+    ppaCum: {
+        title: 'Predicted Points Added - Cumulative',
+        content: 'Cumulative PPA measures the sum of expected points added across all plays in which a player was involved'
+    }
+};
+
 </script>
 
-<style style="scss">
+<style lang="scss">
 .divider-right {
     border-right: 1px solid;
 }
@@ -525,4 +594,14 @@ td[role="cell"]:has(.bg-green-300) {
 td[role="cell"]:has(.bg-red-300) {
     background-color: var(--red-300) !important;
 }
-</style>
+
+.boxscore-tooltip {
+    .p-tooltip-text {
+        width: 300px;
+        background-color: var(--blue-400);
+    }
+
+    &.p-tooltip-right .p-tooltip-arrow {
+        border-right-color: var(--blue-400);
+    }
+}</style>

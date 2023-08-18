@@ -8,6 +8,7 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 
 import PrimeVue from "primevue/config";
+import Tooltip from "primevue/tooltip";
 
 import App from "./App.vue";
 import router from "./router";
@@ -17,6 +18,8 @@ const app = createApp(App);
 app.use(createPinia());
 app.use(PrimeVue, { ripple: true });
 app.use(router);
+
+app.directive("tooltip", Tooltip);
 
 app.config.globalProperties.$filters = {
   capitalize(value: string) {
