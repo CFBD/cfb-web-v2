@@ -16,17 +16,17 @@ export interface GameInfo {
 }
 
 export interface Teams {
-    ppa: Ppa[]
-    cumulativePpa: CumulativePpa[]
+    ppa: TeamPPA[]
+    cumulativePpa: TeamCumulativePPA[]
     successRates: SuccessRate[]
     explosiveness: Explosiveness[]
-    rushing: Rushing3[]
+    rushing: RushingStats[]
     havoc: Havoc[]
     scoringOpportunities: ScoringOpportunity[]
     fieldPosition: FieldPosition[]
 }
 
-export interface Ppa {
+export interface TeamPPA {
     team: string
     plays: number
     overall: Overall
@@ -58,51 +58,19 @@ export interface Rushing {
     quarter4?: number
 }
 
-export interface CumulativePpa {
+export interface TeamCumulativePPA {
     team: string
     plays: number
-    overall: Overall2
-    passing: Passing2
-    rushing: Rushing2
-}
-
-export interface Overall2 {
-    total: number
-    quarter1: number
-    quarter2?: number
-    quarter3?: number
-    quarter4?: number
-}
-
-export interface Passing2 {
-    total: number
-    quarter1: number
-    quarter2?: number
-    quarter3?: number
-    quarter4?: number
-}
-
-export interface Rushing2 {
-    total: number
-    quarter1: number
-    quarter2?: number
-    quarter3?: number
-    quarter4?: number
+    overall: Overall
+    passing: Passing
+    rushing: Rushing
 }
 
 export interface SuccessRate {
     team: string
-    overall: Overall3
+    overall: Overall
     standardDowns: StandardDowns
     passingDowns: PassingDowns
-}
-
-export interface Overall3 {
-    total: number
-    quarter1: number
-    quarter2?: number
-    quarter3?: number
-    quarter4?: number
 }
 
 export interface StandardDowns {
@@ -123,18 +91,11 @@ export interface PassingDowns {
 
 export interface Explosiveness {
     team: string
-    overall: Overall4
+    overall: Overall
 }
 
-export interface Overall4 {
-    total: number
-    quarter1: number
-    quarter2?: number
-    quarter3?: number
-    quarter4?: number
-}
 
-export interface Rushing3 {
+export interface RushingStats {
     team: string
     powerSuccess: string
     stuffRate: string
@@ -168,7 +129,7 @@ export interface FieldPosition {
 
 export interface Players {
     usage: Usage[]
-    ppa: Ppa2[]
+    ppa: PlayerPPA[]
 }
 
 export interface Usage {
@@ -184,15 +145,15 @@ export interface Usage {
     passing: number
 }
 
-export interface Ppa2 {
+export interface PlayerPPA {
     player: string
     team: string
     position: string
-    average: Average
-    cumulative: Cumulative
+    average: PlayerPPAAverages
+    cumulative: PlayerPPACumulative
 }
 
-export interface Average {
+export interface PlayerPPAAverages {
     total: number
     quarter1: number
     quarter2?: number
@@ -202,7 +163,7 @@ export interface Average {
     passing: number
 }
 
-export interface Cumulative {
+export interface PlayerPPACumulative {
     total: number
     quarter1: number
     quarter2?: number

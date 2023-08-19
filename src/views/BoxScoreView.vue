@@ -287,6 +287,343 @@
                     <div v-if="hasPlayerData" class="col-12 md:col-6">
                         <h3>Player Metrics</h3>
                         <Divider></Divider>
+                        <div class="font-bold text-lg m-3">
+                            Usage
+                        </div>
+                        <div class="mb-2 mt-3">{{ boxScoreData.gameInfo.homeTeam }}</div>
+                        <DataTable :value="homeUsage" :rows="20" class="p-datatable-small"
+                            v-tooltip.left="getTooltip('usage')">
+                            <Column field="player" header="Player" sortable>
+                            </Column>
+                            <Column field="total" header="Total" class="text-center" headerClass="center-header" sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.total * 100) }}%
+                                </template>
+                            </Column>
+                            <Column field="quarter1" header="1" class="text-center" headerClass="center-header" sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.quarter1 * 100) }}%
+                                </template>
+                            </Column>
+                            <Column field="quarter2" header="2" class="text-center" headerClass="center-header" sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.quarter2 * 100) }}%
+                                </template>
+                            </Column>
+                            <Column field="quarter3" header="3" class="text-center" headerClass="center-header" sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.quarter3 * 100) }}%
+                                </template>
+                            </Column>
+                            <Column field="quarter4" header="4" class="text-center" headerClass="center-header" sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.quarter4 * 100) }}%
+                                </template>
+                            </Column>
+                            <Column field="rushing" header="Rush" class="text-center" headerClass="center-header" sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.rushing * 100) }}%
+                                </template>
+                            </Column>
+                            <Column field="passing" header="Pass" class="text-center" headerClass="center-header" sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.passing * 100) }}%
+                                </template>
+                            </Column>
+                        </DataTable>
+                        <div class="mb-2 mt-3">{{ boxScoreData.gameInfo.awayTeam }}</div>
+                        <DataTable :value="awayUsage" :rows="20" class="p-datatable-small"
+                            v-tooltip.left="getTooltip('usage')">
+                            <Column field="player" header="Player" sortable>
+                            </Column>
+                            <Column field="total" header="Total" class="text-center" headerClass="center-header" sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.total * 100) }}%
+                                </template>
+                            </Column>
+                            <Column field="quarter1" header="1" class="text-center" headerClass="center-header" sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.quarter1 * 100) }}%
+                                </template>
+                            </Column>
+                            <Column field="quarter2" header="2" class="text-center" headerClass="center-header" sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.quarter2 * 100) }}%
+                                </template>
+                            </Column>
+                            <Column field="quarter3" header="3" class="text-center" headerClass="center-header" sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.quarter3 * 100) }}%
+                                </template>
+                            </Column>
+                            <Column field="quarter4" header="4" class="text-center" headerClass="center-header" sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.quarter4 * 100) }}%
+                                </template>
+                            </Column>
+                            <Column field="rushing" header="Rush" class="text-center" headerClass="center-header" sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.rushing * 100) }}%
+                                </template>
+                            </Column>
+                            <Column field="passing" header="Pass" class="text-center" headerClass="center-header" sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.passing * 100) }}%
+                                </template>
+                            </Column>
+                        </DataTable>
+                        <Divider></Divider>
+                        <div class="font-bold text-lg m-3">
+                            PPA (Avg)
+                        </div>
+                        <div class="mb-2 mt-3">{{ boxScoreData.gameInfo.homeTeam }}</div>
+                        <DataTable :value="homePPA" :rows="20" class="p-datatable-small" v-tooltip.left="getTooltip('ppa')">
+                            <Column field="player" header="Player" sortable>
+                            </Column>
+                            <Column field="average.total" header="Total" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Player PPA', slotProps.data.average.total)">
+                                        {{ slotProps.data.average.total }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="average.quarter1" header="1" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Player PPA', slotProps.data.average.quarter1)">
+                                        {{ slotProps.data.average.quarter1 }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="average.quarter2" header="2" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Player PPA', slotProps.data.average.quarter2)">
+                                        {{ slotProps.data.average.quarter2 }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="average.quarter3" header="3" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Player PPA', slotProps.data.average.quarter3)">
+                                        {{ slotProps.data.average.quarter3 }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="average.quarter4" header="4" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Player PPA', slotProps.data.average.quarter4)">
+                                        {{ slotProps.data.average.quarter4 }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="average.rushing" header="Rush" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Player PPA', slotProps.data.average.rushing)">
+                                        {{ slotProps.data.average.rushing }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="average.passing" header="Pass" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Player PPA', slotProps.data.average.passing)">
+                                        {{ slotProps.data.average.passing }}
+                                    </div>
+                                </template>
+                            </Column>
+                        </DataTable>
+                        <div class="mb-2 mt-3">{{ boxScoreData.gameInfo.awayTeam }}</div>
+                        <DataTable :value="awayPPA" :rows="20" class="p-datatable-small" v-tooltip.left="getTooltip('ppa')">
+                            <Column field="player" header="Player" sortable>
+                            </Column>
+                            <Column field="average.total" header="Total" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Player PPA', slotProps.data.average.total)">
+                                        {{ slotProps.data.average.total }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="average.quarter1" header="1" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Player PPA', slotProps.data.average.quarter1)">
+                                        {{ slotProps.data.average.quarter1 }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="average.quarter2" header="2" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Player PPA', slotProps.data.average.quarter2)">
+                                        {{ slotProps.data.average.quarter2 }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="average.quarter3" header="3" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Player PPA', slotProps.data.average.quarter3)">
+                                        {{ slotProps.data.average.quarter3 }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="average.quarter4" header="4" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Player PPA', slotProps.data.average.quarter4)">
+                                        {{ slotProps.data.average.quarter4 }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="average.rushing" header="Rush" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Player PPA', slotProps.data.average.rushing)">
+                                        {{ slotProps.data.average.rushing }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="average.passing" header="Pass" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Player PPA', slotProps.data.average.passing)">
+                                        {{ slotProps.data.average.passing }}
+                                    </div>
+                                </template>
+                            </Column>
+                        </DataTable>
+                        <Divider></Divider>
+                        <div class="font-bold text-lg m-3">
+                            PPA (Total)
+                        </div>
+                        <div class="mb-2 mt-3">{{ boxScoreData.gameInfo.homeTeam }}</div>
+                        <DataTable :value="homePPA" :rows="20" class="p-datatable-small" v-tooltip.left="getTooltip('ppa')">
+                            <Column field="player" header="Player" sortable>
+                            </Column>
+                            <Column field="cumulative.total" header="Total" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Total PPA', slotProps.data.cumulative.total)">
+                                        {{ slotProps.data.cumulative.total }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="cumulative.quarter1" header="1" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Quarterly PPA', slotProps.data.cumulative.quarter1)">
+                                        {{ slotProps.data.cumulative.quarter1 }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="cumulative.quarter2" header="2" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Quarterly PPA', slotProps.data.cumulative.quarter2)">
+                                        {{ slotProps.data.cumulative.quarter2 }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="cumulative.quarter3" header="3" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Quarterly PPA', slotProps.data.cumulative.quarter3)">
+                                        {{ slotProps.data.cumulative.quarter3 }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="cumulative.quarter4" header="4" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Quarterly PPA', slotProps.data.cumulative.quarter4)">
+                                        {{ slotProps.data.cumulative.quarter4 }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="cumulative.rushing" header="Rush" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Total PPA', slotProps.data.cumulative.rushing)">
+                                        {{ slotProps.data.cumulative.rushing }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="cumulative.passing" header="Pass" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Total PPA', slotProps.data.cumulative.passing)">
+                                        {{ slotProps.data.cumulative.passing }}
+                                    </div>
+                                </template>
+                            </Column>
+                        </DataTable>
+                        <div class="mb-2 mt-3">{{ boxScoreData.gameInfo.awayTeam }}</div>
+                        <DataTable :value="awayPPA" :rows="20" class="p-datatable-small" v-tooltip.left="getTooltip('ppa')">
+                            <Column field="player" header="Player" sortable>
+                            </Column>
+                            <Column field="cumulative.total" header="Total" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Total PPA', slotProps.data.cumulative.total)">
+                                        {{ slotProps.data.cumulative.total }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="cumulative.quarter1" header="1" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Quarterly PPA', slotProps.data.cumulative.quarter1)">
+                                        {{ slotProps.data.cumulative.quarter1 }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="cumulative.quarter2" header="2" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Quarterly PPA', slotProps.data.cumulative.quarter2)">
+                                        {{ slotProps.data.cumulative.quarter2 }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="cumulative.quarter3" header="3" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Quarterly PPA', slotProps.data.cumulative.quarter3)">
+                                        {{ slotProps.data.cumulative.quarter3 }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="cumulative.quarter4" header="4" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Quarterly PPA', slotProps.data.cumulative.quarter4)">
+                                        {{ slotProps.data.cumulative.quarter4 }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="cumulative.rushing" header="Rush" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Total PPA', slotProps.data.cumulative.rushing)">
+                                        {{ slotProps.data.cumulative.rushing }}
+                                    </div>
+                                </template>
+                            </Column>
+                            <Column field="cumulative.passing" header="Pass" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    <div :class="getColumnFormatting('Total PPA', slotProps.data.cumulative.passing)">
+                                        {{ slotProps.data.cumulative.passing }}
+                                    </div>
+                                </template>
+                            </Column>
+                        </DataTable>
                     </div>
                 </div>
             </div>
@@ -308,9 +645,6 @@ import Divider from "primevue/divider";
 import GameSearch from '@/components/GameSearch.vue';
 
 import http from "@/helpers/http";
-
-import { useMainStore } from '@/stores/main';
-const mainStore = useMainStore();
 
 const selectedGameId = ref();
 const boxScoreData: Ref<BoxScoreData | undefined> = ref();
@@ -384,6 +718,15 @@ const getColumnFormatting = (label: string, value: number) => {
             break;
         case "Explosiveness":
             thresholds = [1, 1.5];
+            break;
+        case "Player PPA":
+            thresholds = [0, 0.5];
+            break;
+        case "Quarterly PPA":
+            thresholds = [0, 2.5];
+            break;
+        case "Total PPA":
+            thresholds = [0, 10];
             break;
         default:
             thresholds = null;
@@ -515,6 +858,22 @@ const havocMetrics = computed(() => {
     }]
 });
 
+const homeUsage = computed(() => {
+    return boxScoreData.value?.players.usage.filter(u => u.team === boxScoreData.value?.gameInfo.homeTeam) ?? null;
+});
+
+const awayUsage = computed(() => {
+    return boxScoreData.value?.players.usage.filter(u => u.team === boxScoreData.value?.gameInfo.awayTeam) ?? null;
+});
+
+const homePPA = computed(() => {
+    return boxScoreData.value?.players.ppa.filter(u => u.team === boxScoreData.value?.gameInfo.homeTeam) ?? null;
+});
+
+const awayPPA = computed(() => {
+    return boxScoreData.value?.players.ppa.filter(u => u.team === boxScoreData.value?.gameInfo.awayTeam) ?? null;
+});
+
 const getTooltip = (key: string) => {
     const tooltip = tooltips[key];
     const html = `<div class="font-bold text-lg text-center">${tooltip.title}</div><hr /><div class="text-sm">${tooltip.content}</div>`;
@@ -597,11 +956,12 @@ td[role="cell"]:has(.bg-red-300) {
 
 .boxscore-tooltip {
     .p-tooltip-text {
-        width: 300px;
         background-color: var(--blue-400);
     }
 
-    &.p-tooltip-right .p-tooltip-arrow {
+    &.p-tooltip-right .p-tooltip-arrow,
+    &.p-tooltip-left .p-tooltip-arrow {
         border-right-color: var(--blue-400);
     }
-}</style>
+}
+</style>
