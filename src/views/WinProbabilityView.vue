@@ -210,7 +210,7 @@ onBeforeRouteUpdate((to) => {
         gameId.value = to.params.id;
         loadChartData();
     }
-})
+});
 
 </script>
 

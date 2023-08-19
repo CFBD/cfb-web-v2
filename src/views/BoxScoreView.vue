@@ -8,8 +8,9 @@
         </template>
         <template #content>
             <GameSearch v-model="selectedGameId" clearOnSelection @selection="loadData"></GameSearch>
-            <Divider v-if="boxScoreData"></Divider>
-            <div v-if="boxScoreData">
+            <Divider v-if="boxScoreData || loading"></Divider>
+            <ProgressBar v-if="loading" mode="indeterminate" style="height: 6px" class="mt-5"></ProgressBar>
+            <div v-if="boxScoreData && !loading">
                 <h2>{{ formattedScore() }}</h2>
                 <h4 class="text-500">Note: Garbage time is filtered from these stats</h4>
                 <div class="grid">
@@ -632,15 +633,18 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, type Ref } from "vue";
+import { computed, onBeforeMount, ref, type Ref } from "vue";
+import { onBeforeRouteUpdate, useRouter } from "vue-router";
+
+const router = useRouter();
 
 import { type BoxScoreData } from "../types/boxScoreTypes";
 
 import Card from 'primevue/card';
 import Column from 'primevue/column';
 import DataTable from 'primevue/datatable';
-
 import Divider from "primevue/divider";
+import ProgressBar from "primevue/progressbar";
 
 import GameSearch from '@/components/GameSearch.vue';
 
@@ -649,14 +653,21 @@ import http from "@/helpers/http";
 const selectedGameId = ref();
 const boxScoreData: Ref<BoxScoreData | undefined> = ref();
 
+const loading = ref(false);
+
 const loadData = () => {
     if (selectedGameId.value) {
+        router.push({ name: "boxscore", params: { id: selectedGameId.value } });
+        loading.value = true;
         http.get("/game/box/advanced", {
             params: {
                 gameId: selectedGameId.value
             }
         }).then((response) => {
             boxScoreData.value = response.data;
+            loading.value = false;
+        }).finally(() => {
+            loading.value = false;
         });
     }
 };
@@ -931,6 +942,27 @@ const tooltips: Record<string, { title: string, content: string }> = {
         content: 'Cumulative PPA measures the sum of expected points added across all plays in which a player was involved'
     }
 };
+
+onBeforeMount(async () => {
+    if (router.currentRoute.value.params.id) {
+        // eslint-disable-next-line
+        // @ts-ignore
+        selectedGameId.value = router.currentRoute.value.params.id;
+
+        loadData();
+    }
+});
+
+onBeforeRouteUpdate((to) => {
+    // eslint-disable-next-line
+    // @ts-ignore
+    if (to.name === "boxscore" && to.params.id && to.params.id != selectedGameId.value) {
+        // eslint-disable-next-line
+        // @ts-ignore
+        selectedGameId.value = to.params.id;
+        loadData();
+    }
+});
 
 </script>
 
