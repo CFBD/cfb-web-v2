@@ -23,6 +23,7 @@ export const useNavigationStore = defineStore("navigation", () => {
       },
       {
         label: "Teams",
+        to: "/teams"
       },
       {
         label: "Box Scores",

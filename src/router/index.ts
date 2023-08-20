@@ -57,6 +57,16 @@ const router = createRouter({
       component: () => import("../views/BoxScoreView.vue"),
     },
     {
+      path: "/teams",
+      name: "teams",
+      component: () => import("../views/TeamsView.vue"),
+    },
+    {
+      path: "/team/:team",
+      name: "team",
+      component: () => import("../views/TeamView.vue"),
+    },
+    {
       path: "/about",
       name: "about",
       // route level code-splitting
