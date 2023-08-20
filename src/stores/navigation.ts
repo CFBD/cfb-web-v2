@@ -102,6 +102,7 @@ export const useNavigationStore = defineStore("navigation", () => {
           },
           {
             label: "FAQ & Info",
+            to: "/about"
           },
         ],
       },
