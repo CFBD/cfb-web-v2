@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import ExportView from "../views/ExportView.vue";
 import AboutView from "../views/AboutView.vue";
 import GlossaryView from "../views/GlossaryView.vue";
+import KeyRegisterView from "../views/KeyRegisterView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -67,6 +68,11 @@ const router = createRouter({
       path: "/team/:team",
       name: "team",
       component: () => import("../views/TeamView.vue"),
+    },
+    {
+      path: "/key",
+      name: "key",
+      component: KeyRegisterView
     },
     {
       path: "/glossary",

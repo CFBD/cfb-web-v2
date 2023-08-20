@@ -72,6 +72,7 @@ export const useNavigationStore = defineStore("navigation", () => {
           },
           {
             label: "API Keys",
+            to: "/key"
           },
           {
             separator: true,
