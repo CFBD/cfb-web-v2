@@ -41,6 +41,10 @@ jobs:
 
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
+    env:
+      NODE_ENV: production
+      VITE_API_URL: https://api.collegefootballdata.com
+      VITE_GTAG_ID: G-BPYY3G7LL2
 
     steps:
       - uses: actions/checkout@v2
