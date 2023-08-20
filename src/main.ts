@@ -1,5 +1,4 @@
 import "./assets/main.css";
-// import 'primevue/resources/themes/bootstrap4-dark-blue/theme.css'
 import "primevue/resources/primevue.min.css";
 import "primeflex/primeflex.min.css";
 import "primeicons/primeicons.css";
@@ -10,6 +9,8 @@ import { createPinia } from "pinia";
 import PrimeVue from "primevue/config";
 import Tooltip from "primevue/tooltip";
 
+import VueGtag from "vue-gtag";
+
 import App from "./App.vue";
 import router from "./router";
 
@@ -18,6 +19,12 @@ const app = createApp(App);
 app.use(createPinia());
 app.use(PrimeVue, { ripple: true });
 app.use(router);
+
+app.use(VueGtag, {
+  config: {
+    id: import.meta.env.VITE_GTAG_ID,
+  }
+}, router);
 
 app.directive("tooltip", Tooltip);
 
