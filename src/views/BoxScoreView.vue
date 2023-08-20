@@ -13,7 +13,8 @@
             <div v-if="boxScoreData && !loading">
                 <h2>{{ formattedScore() }}</h2>
                 <h4 class="text-500">Note: Garbage time is filtered from these stats</h4>
-                <div class="grid">
+                <Button link @click="gotoWP">View Win Probability Chart</Button>
+                <div class="grid mt-3">
                     <div class="col-12" :class="{ 'md:col-6': hasPlayerData, 'divider-right': hasPlayerData }">
                         <h3>Team Metrics</h3>
                         <Divider></Divider>
@@ -640,6 +641,7 @@ const router = useRouter();
 
 import { type BoxScoreData } from "../types/boxScoreTypes";
 
+import Button from "primevue/button";
 import Card from 'primevue/card';
 import Column from 'primevue/column';
 import DataTable from 'primevue/datatable';
@@ -942,6 +944,10 @@ const tooltips: Record<string, { title: string, content: string }> = {
         content: 'Cumulative PPA measures the sum of expected points added across all plays in which a player was involved'
     }
 };
+
+const gotoWP = () => {
+    router.push(`/wp/${selectedGameId.value}`);
+}
 
 onBeforeMount(async () => {
     if (router.currentRoute.value.params.id) {

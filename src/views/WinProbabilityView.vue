@@ -9,6 +9,10 @@
         <template #content>
             <GameSearch v-model="gameId" @selection="updateData"></GameSearch>
             <Divider></Divider>
+            <h2>{{ formattedScore() }}</h2>
+            <div v-if="gameId">
+                <Button link @click="gotoBoxScore">View Advanced Box Score</Button>
+            </div>
             <div class="grid justify-content-center pt-5">
                 <Chart type="line" :options="chartOptions" :data="chartData" class="w-10"></Chart>
             </div>
@@ -20,6 +24,7 @@
 import { onBeforeMount, ref, type Ref } from 'vue';
 import { onBeforeRouteUpdate, useRouter } from 'vue-router';
 
+import Button from 'primevue/button';
 import Card from 'primevue/card';
 import Chart from 'primevue/chart';
 import Divider from 'primevue/divider';
@@ -83,6 +88,15 @@ const chartOptions = ref({
         }
     },
 });
+
+const formattedScore = () => {
+    if (plays.value.length) {
+        const last = plays.value[plays.value.length - 1];
+        return `${last.home} ${last.homeScore}, ${last.away} ${last.awayScore}`;
+    }
+
+    return "";
+};
 
 const updateData = (game: { id: number }) => {
     router.push({ name: "wp", params: { id: game.id } });
@@ -187,6 +201,10 @@ const loadChartData = () => {
         });
     }
 }
+
+const gotoBoxScore = () => {
+    router.push(`/boxscore/${gameId.value}`);
+};
 
 onBeforeMount(async () => {
     if (router.currentRoute.value.params.id) {
