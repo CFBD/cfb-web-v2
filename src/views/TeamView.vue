@@ -5,9 +5,10 @@
         </template>
         <template #content>
             <div><label>Year</label></div>
-            <Dropdown v-model="selectedYear" :options="mainStore.yearRanges"></Dropdown>
+            <Dropdown v-model="selectedYear" :options="mainStore.yearRanges" @change="loadData"></Dropdown>
             <Divider></Divider>
-            <div v-if="teamStats">
+            <ProgressBar v-if="loading" mode="indeterminate" style="height: 6px" class="mt-5"></ProgressBar>
+            <div v-if="teamStats && !loading">
                 <div class="grid">
                     <div class="col-12" :class="{ 'md:col-6': hasPlayerData, 'divider-right': hasPlayerData }">
                         <h3>Team Metrics</h3>
@@ -155,7 +156,7 @@
                         <div class="font-bold text-lg m-3">
                             Explosiveness
                         </div>
-                        <DataTable :value="teamSuccessMetrics" :rows="3" class="p-datatable-small"
+                        <DataTable :value="explosivenessMetrics" :rows="3" class="p-datatable-small"
                             v-tooltip="getTooltip('explosiveness')">
                             <Column field="label" header=""></Column>
                             <Column field="offense" header="Offense" class="text-center" headerClass="center-header">
@@ -177,6 +178,75 @@
                     <div class="col-12 md:col-6" v-if="hasPlayerData">
                         <h3>Player Metrics</h3>
                         <Divider></Divider>
+                        <div class="font-bold text-lg m-3">
+                            Usage
+                        </div>
+                        <DataTable :value="playerUsage" :rows="20" class="p-datatable-small"
+                            v-tooltip.left="getTooltip('usage')">
+                            <Column field="name" header="Player" sortable>
+                            </Column>
+                            <Column field="position" header="Position" sortable>
+                            </Column>
+                            <Column field="usage.overall" header="All" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.usage.overall * 100) }}%
+                                </template>
+                            </Column>
+                            <Column field="usage.rush" header="Rushing" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.usage.rush * 100) }}%
+                                </template>
+                            </Column>
+                            <Column field="usage.pass" header="Passing" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.usage.pass * 100) }}%
+                                </template>
+                            </Column>
+                            <Column field="usage.standardDowns" header="Standard Downs" class="text-center"
+                                headerClass="center-header" sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.usage.standardDowns * 100) }}%
+                                </template>
+                            </Column>
+                            <Column field="usage.passingDowns" header="Passing Downs" class="text-center"
+                                headerClass="center-header" sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.usage.passingDowns * 100) }}%
+                                </template>
+                            </Column>
+                        </DataTable>
+                        <Divider></Divider>
+                        <div class="font-bold text-lg m-3">
+                            Usage
+                        </div>
+                        <DataTable :value="playerPPA" :rows="20" class="p-datatable-small"
+                            v-tooltip.left="getTooltip('ppa')">
+                            <Column field="name" header="Player" sortable>
+                            </Column>
+                            <Column field="position" header="Position" sortable>
+                            </Column>
+                            <Column field="averagePPA.all" header="All" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.averagePPA.all * 1000) / 1000 }}
+                                </template>
+                            </Column>
+                            <Column field="averagePPA.rush" header="Rushing" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.averagePPA.rush * 1000) / 1000 }}
+                                </template>
+                            </Column>
+                            <Column field="averagePPA.pass" header="Passing" class="text-center" headerClass="center-header"
+                                sortable>
+                                <template #body="slotProps">
+                                    {{ Math.round(slotProps.data.averagePPA.pass * 1000) / 1000 }}
+                                </template>
+                            </Column>
+                        </DataTable>
                     </div>
                 </div>
             </div>
@@ -193,6 +263,7 @@ import Column from 'primevue/column';
 import DataTable from 'primevue/datatable';
 import Divider from 'primevue/divider';
 import Dropdown from 'primevue/dropdown';
+import ProgressBar from 'primevue/progressbar';
 
 import { useRouter } from 'vue-router';
 const router = useRouter();
@@ -208,12 +279,23 @@ const selectedYear = ref(mainStore.defaultYear);
 const teamStats: Ref<TeamStats | undefined | null> = ref();
 const playerPPA: Ref<PlayerPPA[] | undefined | null> = ref();
 const playerUsage: Ref<PlayerUsage[] | undefined | null> = ref();
+const loadingTeam = ref(false);
+const loadingPPA = ref(false);
+const loadingUsage = ref(false);
+
+const loading = computed(() => {
+    return loadingTeam.value || loadingPPA.value || loadingPPA.value;
+});
 
 const hasPlayerData = computed(() => {
     return playerPPA.value && playerUsage.value;
 });
 
 const loadData = () => {
+    loadingTeam.value = true;
+    loadingPPA.value = true;
+    loadingUsage.value = true;
+
     teamStats.value = null;
     playerPPA.value = null;
     playerUsage.value = null;
@@ -228,6 +310,9 @@ const loadData = () => {
         if (result.data && result.data.length) {
             teamStats.value = result.data[0];
         }
+        loadingTeam.value = false;
+    }).finally(() => {
+        loadingTeam.value = false;
     });
 
     http.get('/player/usage', {
@@ -240,6 +325,9 @@ const loadData = () => {
         if (result.data && result.data.length) {
             playerUsage.value = result.data;
         }
+        loadingUsage.value = false;
+    }).finally(() => {
+        loadingUsage.value = false;
     });
 
     http.get('/ppa/players/season', {
@@ -252,6 +340,9 @@ const loadData = () => {
         if (result.data && result.data.length) {
             playerPPA.value = result.data;
         }
+        loadingPPA.value = false;
+    }).finally(() => {
+        loadingPPA.value = false;
     });
 };
 
