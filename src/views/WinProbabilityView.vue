@@ -7,7 +7,7 @@
             Select a game to generate predicted win probabilities.
         </template>
         <template #content>
-            <GameSearch v-model="gameId" @selection="updateData"></GameSearch>
+            <GameSearch v-model="gameId" @selection="updateData" clear-on-selection></GameSearch>
             <Divider></Divider>
             <h2>{{ formattedScore() }}</h2>
             <div v-if="gameId">
@@ -65,10 +65,8 @@ const chartOptions = ref({
     },
     scales: {
         y: {
-            ticks: {
-                min: 0,
-                max: 100
-            },
+            min: 0,
+            max: 100,
             title: {
                 display: true,
                 text: 'Win Percentage'
@@ -174,10 +172,8 @@ const loadChartData = () => {
                     },
                     scales: {
                         y: {
-                            ticks: {
-                                min: 0,
-                                max: 100
-                            },
+                            min: 0,
+                            max: 100,
                             title: {
                                 display: true,
                                 text: 'Win Percentage'
