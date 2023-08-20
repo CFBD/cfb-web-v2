@@ -99,6 +99,7 @@ export const useNavigationStore = defineStore("navigation", () => {
         items: [
           {
             label: "Glossary",
+            to: "/glossary"
           },
           {
             label: "FAQ & Info",
