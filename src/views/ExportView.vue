@@ -28,6 +28,7 @@
     </Fieldset>
     <EndpointForm v-if="apiStore.showEndpointForm"></EndpointForm>
     <DataExporter v-if="apiStore.showDataTable"></DataExporter>
+    <Toast></Toast>
   </div>
 </template>
 
@@ -39,6 +40,7 @@ import { onBeforeRouteUpdate } from "vue-router";
 import Button from "primevue/button";
 import Fieldset from "primevue/fieldset";
 import InputText from "primevue/inputtext";
+import Toast from "primevue/toast";
 
 import DataExporter from "@/components/DataExporter.vue";
 import EndpointForm from "@/components/EndpointForm.vue";

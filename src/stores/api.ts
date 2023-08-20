@@ -3,6 +3,8 @@ import type { Ref } from "vue";
 import { defineStore } from "pinia";
 import { useRouter, type RouteLocationNormalized } from "vue-router";
 
+import { useToast } from "primevue/usetoast";
+
 import http from "@/helpers/http";
 import { flattenData } from "@/helpers/data";
 import type { FieldsetToggleEvent } from "primevue/fieldset";
@@ -45,6 +47,7 @@ export interface Endpoint {
 
 export const useApiStore = defineStore("api", () => {
   const router = useRouter();
+  const toast = useToast();
 
   const hyrdating = ref(false);
   const docs = ref();
@@ -192,6 +195,12 @@ export const useApiStore = defineStore("api", () => {
         dataItems.value = flattenData(selectedEndpoint.value?.key, res.data);
         displayFields.value = allFields.value;
         loadingData.value = false;
+
+        if (!dataItems.value || dataItems.value.length === 0) {
+          toast.add({ severity: "info", summary: "No data returned", detail: "Try specifying different filter values and resubmitting.", life: 3000 })
+        }
+      }).catch(() => {
+        toast.add({ severity: "warn", summary: "Invalid query", detail: "Try adding more filter values and resubmitting.", life: 3000 })
       }).finally(() => {
         loadingData.value = false;
       })

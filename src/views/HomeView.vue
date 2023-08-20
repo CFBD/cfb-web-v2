@@ -21,16 +21,17 @@ const gotoKeys = () => {
 
 <template>
   <div class="grid home-content mt-3 pl-3">
-    <main class="col-9">
+    <main class="col-12 md:col-9">
       <BlogGroup />
     </main>
-    <div class="col-3 text-center">
+    <div class="col-12 md:col-3 text-center">
       <div class="mt-3">
-        <Button icon="pi pi-key" label="API Keys" severity="warning" size="large" text @click="gotoKeys"></Button>
+        <Button icon="pi pi-key" label="API Keys" severity="warning" size="large" class="w-full md:w-8"
+          @click="gotoKeys"></Button>
       </div>
       <div class="mt-3">
         <a href="https://www.patreon.com/bePatron?u=23067681" target="_blank">
-          <Button label="Become a Patron!" severity="danger">
+          <Button label="Become a Patron!" severity="danger" class="w-full md:w-8">
             <template #icon>
               <svg class="mr-2" height="15px" width="15px" viewBox="0 -4.5 256 256" version="1.1"
                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -47,7 +48,7 @@ const gotoKeys = () => {
       </div>
       <div class="mt-3">
         <a href="https://twitter.com/cfb_data" target="_blank">
-          <Button icon="pi pi-twitter" label="Follow me on Twitter" severity="primary"></Button>
+          <Button icon="pi pi-twitter" label="Follow me on Twitter" severity="primary" class="w-full md:w-8"></Button>
         </a>
         <!-- <a
           class="twitter-timeline"

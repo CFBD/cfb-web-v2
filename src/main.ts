@@ -8,6 +8,7 @@ import { createPinia } from "pinia";
 
 import PrimeVue from "primevue/config";
 import Tooltip from "primevue/tooltip";
+import ToastService from "primevue/toastservice";
 
 import VueGtag from "vue-gtag";
 
@@ -25,6 +26,8 @@ app.use(VueGtag, {
     id: import.meta.env.VITE_GTAG_ID,
   }
 }, router);
+
+app.use(ToastService);
 
 app.directive("tooltip", Tooltip);
 
