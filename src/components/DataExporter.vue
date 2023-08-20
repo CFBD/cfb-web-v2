@@ -4,7 +4,7 @@
             Data View
         </template>
         <template #content>
-            <DataTable ref="dt" :value="apiStore.dataItems" lazy paginator :loading="apiStore.loadingData" :rows="10"
+            <DataTable ref="dt" :value="apiStore.dataItems" :loading="apiStore.loadingData" paginator :rows="10"
                 :rowsPerPageOptions="[10, 25, 50, 100]" class="p-datatable-small">
                 <template #header>
                     <div style="text-align:left">

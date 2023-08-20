@@ -7,7 +7,8 @@
         </template>
         <template #content>
             <div class="grid">
-                <div class="col-3" v-for="qp in apiStore.selectedEndpoint?.path.get.parameters" :key="qp.name">
+                <div class="col-12 md:col-6 lg:col-3" v-for="qp in apiStore.selectedEndpoint?.path.get.parameters"
+                    :key="qp.name">
                     <div>
                         <label :for="`input-${qp.name}`">{{
                             //@ts-ignore
