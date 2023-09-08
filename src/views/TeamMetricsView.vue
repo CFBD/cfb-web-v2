@@ -45,12 +45,12 @@
             <div class="formgrid grid mt-3 justify-content-center">
                 <div class="field col-12 sm:col-6 lg:col-3">
                     <label>Start Week</label>
-                    <InputNumber v-model="startWeek" :use-grouping="false" :min="1" :max="16" class="w-full"
+                    <InputNumber v-model="startWeek" :use-grouping="false" :min="1" :max="20" class="w-full"
                         @change="refreshData"></InputNumber>
                 </div>
                 <div class="field col-12 sm:col-6 lg:col-3">
                     <label>End Week</label>
-                    <InputNumber v-model="endWeek" :use-grouping="false" :min="1" :max="16" class="w-full"
+                    <InputNumber v-model="endWeek" :use-grouping="false" :min="1" :max="20" class="w-full"
                         @change="refreshData"></InputNumber>
                 </div>
             </div>
