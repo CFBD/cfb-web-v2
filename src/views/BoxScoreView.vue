@@ -451,6 +451,9 @@
                         <div class="mb-2 mt-3">{{ boxScoreData.gameInfo.awayTeam }}</div>
                         <DataTable :value="awayPPA" :rows="20" class="p-datatable-small" v-tooltip.left="getTooltip('ppa')">
                             <Column field="player" header="Player" sortable>
+                                <template #body="slotProps">
+                                    {{ slotProps.data.player }} ({{ slotProps.data.position }})
+                                </template>
                             </Column>
                             <Column field="average.total" header="Total" class="text-center" headerClass="center-header"
                                 sortable>
@@ -516,6 +519,9 @@
                         <div class="mb-2 mt-3">{{ boxScoreData.gameInfo.homeTeam }}</div>
                         <DataTable :value="homePPA" :rows="20" class="p-datatable-small" v-tooltip.left="getTooltip('ppa')">
                             <Column field="player" header="Player" sortable>
+                                <template #body="slotProps">
+                                    {{ slotProps.data.player }} ({{ slotProps.data.position }})
+                                </template>
                             </Column>
                             <Column field="cumulative.total" header="Total" class="text-center" headerClass="center-header"
                                 sortable>
@@ -577,6 +583,9 @@
                         <div class="mb-2 mt-3">{{ boxScoreData.gameInfo.awayTeam }}</div>
                         <DataTable :value="awayPPA" :rows="20" class="p-datatable-small" v-tooltip.left="getTooltip('ppa')">
                             <Column field="player" header="Player" sortable>
+                                <template #body="slotProps">
+                                    {{ slotProps.data.player }} ({{ slotProps.data.position }})
+                                </template>
                             </Column>
                             <Column field="cumulative.total" header="Total" class="text-center" headerClass="center-header"
                                 sortable>
