@@ -296,6 +296,9 @@
                         <DataTable :value="homeUsage" :rows="20" class="p-datatable-small"
                             v-tooltip.left="getTooltip('usage')">
                             <Column field="player" header="Player" sortable>
+                                <template #body="slotProps">
+                                    {{ slotProps.data.player }} ({{ slotProps.data.position }})
+                                </template>
                             </Column>
                             <Column field="total" header="Total" class="text-center" headerClass="center-header" sortable>
                                 <template #body="slotProps">
@@ -337,6 +340,9 @@
                         <DataTable :value="awayUsage" :rows="20" class="p-datatable-small"
                             v-tooltip.left="getTooltip('usage')">
                             <Column field="player" header="Player" sortable>
+                                <template #body="slotProps">
+                                    {{ slotProps.data.player }} ({{ slotProps.data.position }})
+                                </template>
                             </Column>
                             <Column field="total" header="Total" class="text-center" headerClass="center-header" sortable>
                                 <template #body="slotProps">
@@ -381,6 +387,9 @@
                         <div class="mb-2 mt-3">{{ boxScoreData.gameInfo.homeTeam }}</div>
                         <DataTable :value="homePPA" :rows="20" class="p-datatable-small" v-tooltip.left="getTooltip('ppa')">
                             <Column field="player" header="Player" sortable>
+                                <template #body="slotProps">
+                                    {{ slotProps.data.player }} ({{ slotProps.data.position }})
+                                </template>
                             </Column>
                             <Column field="average.total" header="Total" class="text-center" headerClass="center-header"
                                 sortable>
