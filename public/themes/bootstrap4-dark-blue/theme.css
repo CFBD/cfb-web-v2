@@ -5967,3 +5967,13 @@
 #app {
   background: rgba(100, 100, 100, 0.8);
 }
+
+.insomnia-button {
+  background: var(--purple-400);
+  border-color: var(--purple-500);
+}
+
+.insomnia-button:enabled:hover {
+  background: var(--purple-500);
+  border-color: var(--purple-500);
+}
