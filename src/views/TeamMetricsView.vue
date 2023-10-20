@@ -38,7 +38,7 @@
                 <div class="field col-12 sm:col-6 lg:col-3">
                     <label>Conference Filter</label>
                     <Dropdown v-model="conference" :options="mainStore.fbsConferences" optionLabel="text"
-                        optionValue="value" class="w-full" @change="reloadData">
+                        optionValue="text" class="w-full" @change="reloadData">
                     </Dropdown>
                 </div>
             </div>
@@ -46,12 +46,12 @@
                 <div class="field col-12 sm:col-6 lg:col-3">
                     <label>Start Week</label>
                     <InputNumber v-model="startWeek" :use-grouping="false" :min="1" :max="20" class="w-full"
-                        @change="refreshData"></InputNumber>
+                        @update:model-value="refreshData"></InputNumber>
                 </div>
                 <div class="field col-12 sm:col-6 lg:col-3">
                     <label>End Week</label>
                     <InputNumber v-model="endWeek" :use-grouping="false" :min="1" :max="20" class="w-full"
-                        @change="refreshData"></InputNumber>
+                        @update:model-value="refreshData"></InputNumber>
                 </div>
             </div>
             <Divider></Divider>
@@ -156,7 +156,7 @@ const metricTypes = ref([{
 }]);
 
 const selectedYear = ref(mainStore.defaultYear);
-const conference = 'All';
+const conference = ref('All');
 const startWeek = ref(null);
 const endWeek = ref(null);
 const dataItems = ref([]);
@@ -221,7 +221,7 @@ const reloadData = () => {
 
         // eslint-disable-next-line
         // @ts-ignore
-        let points = dataItems.value.filter(r => conference === 'All' || r.conference == conference).map(r => {
+        let points = dataItems.value.filter(r => conference.value === 'All' || r.conference == conference.value).map(r => {
             let img = new Image();
             // eslint-disable-next-line
             // @ts-ignore
@@ -242,7 +242,7 @@ const reloadData = () => {
                 pointStyle: points,
                 // eslint-disable-next-line
                 // @ts-ignore
-                data: dataItems.value.filter(r => conference == 'All' || r.conference == conference).map(r => ({
+                data: dataItems.value.filter(r => conference.value == 'All' || r.conference == conference.value).map(r => ({
                     x: getValueByKey(r, data1Label.split('.')),
                     y: getValueByKey(r, data2Label.split('.'))
                 }))
