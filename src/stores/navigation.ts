@@ -96,6 +96,34 @@ export const useNavigationStore = defineStore("navigation", () => {
         ],
       },
       {
+        label: "API v2",
+        items: [
+          {
+            label: "Docs",
+            url: "https://apinext.collegefootballdata.com",
+            target: "_blank"
+          },
+          {
+            label: "API Keys",
+            to: "/key"
+          },
+          {
+            separator: true,
+            label: "Wrappers",
+          },
+          {
+            label: "Python",
+            url: "https://github.com/CFBD/cfbd-python/tree/next",
+            target: "_blank"
+          },
+          {
+            label: "JavaScript",
+            url: "https://www.npmjs.com/package/cfbd",
+            target: "_blank"
+          },
+        ],
+      },
+      {
         label: "About",
         items: [
           {

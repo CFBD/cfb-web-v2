@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Run tests
         run: |
@@ -47,7 +47,7 @@ jobs:
       VITE_GTAG_ID: G-BPYY3G7LL2
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Build image
         run: docker build . --file Dockerfile --build-arg VITE_API_URL=https://api.collegefootballdata.com --build-arg VITE_GTAG_ID=G-BPYY3G7LL2 --tag image
