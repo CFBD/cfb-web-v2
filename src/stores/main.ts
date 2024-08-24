@@ -45,8 +45,8 @@ export const useMainStore = defineStore("main", () => {
   const playTypes: Ref<PlayType[]> = ref([]);
   const playStatTypes: Ref<PlayStatType[]> = ref([]);
 
-  const yearRanges = ref([2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]);
-  const defaultYear = ref(2023);
+  const yearRanges = ref([2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]);
+  const defaultYear = ref(2024);
 
   const fbsConferences = ref([
     {

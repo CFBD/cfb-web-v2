@@ -4,6 +4,7 @@ import { useMainStore } from "@/stores/main";
 import { useRouter } from "vue-router";
 import BlogGroup from "@/components/BlogGroup.vue";
 import Button from "primevue/button";
+import Message from "primevue/message";
 
 const mainStore = useMainStore();
 const router = useRouter();
@@ -22,6 +23,11 @@ const gotoKeys = () => {
 <template>
   <div class="grid home-content mt-3 pl-3">
     <main class="col-12 md:col-9">
+      <Message severity="warn" :closable="false">
+        CFBD API V2 is now available in a limited beta for Patreon subscribers.
+        CFBD API V1 will be sunset prior to the 2025 season.
+        <a href="https://www.patreon.com/posts/110346912">Click here for more details.</a>
+      </Message>
       <BlogGroup />
     </main>
     <div class="col-12 md:col-3 text-center">
