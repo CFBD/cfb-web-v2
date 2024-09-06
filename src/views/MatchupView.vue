@@ -36,7 +36,7 @@
             <Divider></Divider>
             <div v-if="matchupData" class="grid justify-content-center m-6">
                 <div class="col-12 lg:col-3">
-                    <img :src="team1.logos[0]" class="matchup-logo" />
+                    <img :src="`https://cdn.collegefootballdata.com/logos/256/${team1.id}.png`" class="matchup-logo" />
                     <h2 :style="{ color: team1.color }">{{ team1.school }}</h2>
                 </div>
                 <div class="col-12 lg:col-2">
@@ -49,7 +49,7 @@
                     </h1>
                 </div>
                 <div class="col-12 lg:col-3">
-                    <img :src="team2.logos[0]" class="matchup-logo" />
+                    <img :src="`https://cdn.collegefootballdata.com/logos/256/${team2.id}.png`" class="matchup-logo" />
                     <h2 :style="{ color: team2.color }">{{ team2.school }}</h2>
                 </div>
             </div>

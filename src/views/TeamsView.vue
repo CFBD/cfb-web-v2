@@ -11,7 +11,7 @@
                 <div v-for="c in conferences" :key="c.name" class="col-6 md:col-4 mt-3">
                     <div class="text-lg font-bold text-left mb-2">{{ c.name }}</div>
                     <div v-for="t in c.teams" :key="t.id" class="text-left">
-                        <Button @click="goto(t.name)" link><img :src="t.logo" /><span class="ml-2">{{ t.name
+                        <Button @click="goto(t.name)" link><img :src="`https://cdn.collegefootballdata.com/logos/48/${t.id}.png`" /><span class="ml-2">{{ t.name
                         }}</span></Button>
                     </div>
                 </div>
@@ -32,7 +32,7 @@ const mainStore = useMainStore();
 import { useRouter } from "vue-router";
 const router = useRouter();
 
-let conferences: Ref<{ name: string, teams: { id: number, name: string, logo: string }[] }[]> = ref([]);
+let conferences: Ref<{ name: string, teams: { id: number, name: string }[] }[]> = ref([]);
 
 const loadTeams = () => {
     let confs = Array.from(new Set(mainStore.teams.filter(t => t.classification === "fbs").map(t => t.conference))).sort();
@@ -43,7 +43,6 @@ const loadTeams = () => {
             .map(t => ({
                 id: t.id,
                 name: t.school,
-                logo: `/logos/${t.id}.png`
             }))
             .sort((a, b) => {
                 let teamA = a.name.toLowerCase();

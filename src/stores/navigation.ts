@@ -8,7 +8,7 @@ import { useMainStore } from "./main";
 export const useNavigationStore = defineStore("navigation", () => {
   const menuIcon = computed((): string => {
     const mainStore = useMainStore();
-    return mainStore.darkMode ? "LetterLogoDark.png" : "LetterLogo.png";
+    return mainStore.darkMode ? "https://cdn.collegefootballdata.com/logos/LetterLogoDark.png" : "https://cdn.collegefootballdata.com/logos/LetterLogo.png";
   });
 
   const menuItems = computed((): MenuItem[] => {
