@@ -126,7 +126,7 @@ const reloadData = () => {
             const ppaData = ppaResults.data;
             const playerData = usageData.map((r: { id: number, team: string, name: string, usage: { overall: number } }) => {
                 let playerPPA = ppaData.find((p: { id: number }) => p.id == r.id);
-                let team = mainStore.teams.find(t => t.school == r.team);
+                let team = mainStore.teams.find(t => t.classification == 'fbs' && t.school == r.team);
 
                 if (!playerPPA || !team) {
                     return null;

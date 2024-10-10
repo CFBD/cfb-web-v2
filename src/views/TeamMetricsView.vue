@@ -225,7 +225,7 @@ const reloadData = () => {
             let img = new Image();
             // eslint-disable-next-line
             // @ts-ignore
-            img.src = `https://cdn.collegefootballdata.com/logos/32/${mainStore.teams.find(t => t.school == r.team).id}.png`
+            img.src = `https://cdn.collegefootballdata.com/logos/32/${mainStore.teams.find(t => t.classification == 'fbs' && t.school == r.team).id}.png`
             return img;
         });
 
