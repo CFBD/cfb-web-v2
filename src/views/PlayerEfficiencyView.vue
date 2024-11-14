@@ -49,7 +49,7 @@ import InputNumber from 'primevue/inputnumber';
 import ProgressSpinner from 'primevue/progressspinner';
 import { onMounted, ref } from 'vue';
 
-import { useMainStore } from '@/stores/main';
+import { useMainStore } from '~/stores/main';
 const mainStore = useMainStore();
 
 import http from "@/helpers/http";

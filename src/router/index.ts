@@ -2,8 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import ExportView from "../views/ExportView.vue";
 import AboutView from "../views/AboutView.vue";
-import GlossaryView from "../views/GlossaryView.vue";
-import KeyRegisterView from "../views/KeyRegisterView.vue";
+import GlossaryView from "../../pages/glossary.vue";
+import KeyRegisterView from "../../pages/keys.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -57,7 +57,7 @@ const router = createRouter({
     {
       path: "/boxscore/:id(\\d+)?",
       name: "boxscore",
-      component: () => import("../views/BoxScoreView.vue"),
+      component: () => import("../../pages/boxscore/BoxScoreView.vue"),
     },
     {
       path: "/teams",

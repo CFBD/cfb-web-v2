@@ -51,7 +51,7 @@ import { ref, type Ref } from 'vue';
 
 import http from '@/helpers/http';
 
-import { useMainStore } from '@/stores/main';
+import { useMainStore } from '~/stores/main';
 const mainStore = useMainStore();
 
 const year = ref(mainStore.defaultYear);

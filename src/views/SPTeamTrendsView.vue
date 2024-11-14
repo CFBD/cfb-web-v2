@@ -51,7 +51,7 @@ import Dropdown from 'primevue/dropdown';
 
 import http from "@/helpers/http";
 
-import { useMainStore } from '@/stores/main';
+import { useMainStore } from '~/stores/main';
 const mainStore = useMainStore();
 
 const datapoints = ref([{
