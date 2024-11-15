@@ -93,6 +93,11 @@ const gotoKeys = () => {
         > -->
       </div>
       <div class="mt-3">
+        <a href="https://bsky.app/profile/collegefootballdata.com" target="_blank">
+          <Button icon="pi pi-at" label="Follow me on Bluesky" severity="primary" class="w-full md:w-8"></Button>
+        </a>
+      </div>
+      <div class="mt-3">
         <iframe :src="`https://discord.com/widget?id=578652864793018368&theme=${mainStore.darkMode ? 'dark' : 'light'
           }`" width="300" height="500" allowtransparency="true" frameborder="0"
           sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
