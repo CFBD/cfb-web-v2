@@ -24,9 +24,9 @@ const gotoKeys = () => {
   <div class="grid home-content mt-3 pl-3">
     <main class="col-12 md:col-9">
       <Message severity="warn" :closable="false">
-        CFBD API V2 is now available in a limited beta for Patreon subscribers.
-        CFBD API V1 will be sunset prior to the 2025 season.
-        <a href="https://www.patreon.com/posts/110346912">Click here for more details.</a>
+        CFBD API V2 is now in general availability.
+        CFBD API V1 will be sunset in Spring 2025.
+        <a href="https://blog.collegefootballdata.com/api-v2-is-now-in-general-availability/">Click here for more details.</a>
       </Message>
       <BlogGroup />
     </main>
