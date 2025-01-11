@@ -124,6 +124,11 @@ export const useNavigationStore = defineStore("navigation", () => {
         ],
       },
       {
+        label: "GraphQL",
+        url: "https://graphqldocs.collegefootballdata.com",
+        target: "_blank",
+      },
+      {
         label: "About",
         items: [
           {
