@@ -51,8 +51,7 @@ import { onMounted, ref } from 'vue';
 
 import { useMainStore } from '~/stores/main';
 const mainStore = useMainStore();
-
-import http from "@/helpers/http";
+const config = useRuntimeConfig();
 
 const positions = ref([
     'QB',
@@ -105,7 +104,9 @@ const scatterOptions = ref({
 
 const reloadData = () => {
     loading.value = true
-    http.get('/player/usage', {
+    $fetch('/player/usage', {
+        method: 'GET',
+        baseURL: config.public.apiBaseUrl,
         params: {
             year: year.value,
             conference: conference.value == 'All' ? '' : conference.value,
@@ -113,7 +114,9 @@ const reloadData = () => {
             excludeGarbageTime: true
         }
     }).then(usageResults => {
-        http.get('/ppa/players/season', {
+        $fetch('/ppa/players/season', {
+            method: 'GET',
+            baseURL: config.public.apiBaseUrl,
             params: {
                 year: year.value,
                 conference: conference.value == 'All' ? '' : conference.value,
@@ -122,8 +125,8 @@ const reloadData = () => {
                 excludeGarbageTime: true
             }
         }).then(ppaResults => {
-            const usageData = usageResults.data;
-            const ppaData = ppaResults.data;
+            const usageData = usageResults;
+            const ppaData = ppaResults;
             const playerData = usageData.map((r: { id: number, team: string, name: string, usage: { overall: number } }) => {
                 let playerPPA = ppaData.find((p: { id: number }) => p.id == r.id);
                 let team = mainStore.teams.find(t => t.classification == 'fbs' && t.school == r.team);

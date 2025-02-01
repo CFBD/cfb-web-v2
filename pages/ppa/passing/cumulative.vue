@@ -49,10 +49,10 @@ import PlayerSearch from '@/components/PlayerSearch.vue';
 
 import { ref, type Ref } from 'vue';
 
-import http from '@/helpers/http';
-
 import { useMainStore } from '~/stores/main';
 const mainStore = useMainStore();
+
+const config = useRuntimeConfig();
 
 const year = ref(mainStore.defaultYear);
 const rollingPlays: Ref<number | null> = ref(null);
@@ -104,10 +104,12 @@ const chartOptions = ref({
 });
 
 const loadPlayer = (player: { id: number, displayName: string, teamColor: string }) => {
-    http.get('/player/ppa/passing', {
+    $fetch('/player/ppa/passing', {
+        method: 'GET',
+        baseURL: config.public.apiBaseUrl,
         params: {
             id: player.id,
-            rollingPlays: rollingPlays.value,
+            rollingPlays: rollingPlays.value ?? undefined,
             year: year.value
         }
     }).then(results => {
@@ -120,7 +122,7 @@ const loadPlayer = (player: { id: number, displayName: string, teamColor: string
             borderColor: player.teamColor,
             fill: false,
             label: player.displayName,
-            data: results.data.map((r: { playNumber: number, avgPPA: number }) => ({
+            data: results.map((r: { playNumber: number, avgPPA: number }) => ({
                 x: r.playNumber,
                 y: r.avgPPA
             }))

@@ -34,7 +34,7 @@ import Divider from 'primevue/divider';
 import Dropdown from 'primevue/dropdown';
 import InputNumber from 'primevue/inputnumber';
 
-import http from "@/helpers/http";
+const config = useRuntimeConfig();
 
 const downs = ref([1, 2, 3, 4]);
 const selectedDown = ref();
@@ -78,7 +78,9 @@ const chartData = ref({
 const reloadData = () => {
     if (selectedDown.value && distance.value) {
         // this.$ga.event('visualization', 'generation', 'predicted-points');
-        http.get('/ppa/predicted', {
+        $fetch('/ppa/predicted', {
+            method: 'GET',
+            baseURL: config.public.apiBaseUrl,
             params: {
                 down: selectedDown.value,
                 distance: distance.value
@@ -90,7 +92,7 @@ const reloadData = () => {
                 datasets: [{
                     pointRadius: 5,
                     fill: false,
-                    data: results.data.map((d: { yardLine: number, predictedPoints: number }) => ({
+                    data: results.map((d: { yardLine: number, predictedPoints: number }) => ({
                         x: `${d.yardLine}`,
                         y: d.predictedPoints
                     }))

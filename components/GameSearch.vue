@@ -75,10 +75,10 @@ const searchGames = () => {
         method: 'GET',
         baseURL: config.public.apiBaseUrl,
         params: {
-            year: selectedYear.value,
-            week: selectedWeek.value,
-            seasonType: selectedSeasonType.value,
-            conference: selectedConference.value === 'All' ? null : selectedConference.value,
+            year: selectedYear.value ?? undefined,
+            week: selectedWeek.value ?? undefined,
+            seasonType: selectedSeasonType.value ?? undefined,
+            conference: selectedConference.value === 'All' ? undefined : selectedConference.value,
             team: selectedTeam.value,
             classification: "fbs"
         }

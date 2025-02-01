@@ -111,10 +111,10 @@ export const useApiStore = defineStore("api", () => {
       docs.value = res;
       paths.value = Object.keys(res.paths);
       categories.value = Array.from(
-        new Set(paths.value.map((p) => res.paths[p].get.tags[0]))
+        new Set(paths.value.map((p) => res.paths[p].get.tags[0]).filter((c) => c !== "AdjustedMetrics"))
       );
       endpoints.value = paths.value
-        .filter((p) => p !== "/games/weather" && p !== "/scoreboard")
+        .filter((p) => p !== "/games/weather" && p !== "/scoreboard" && p !== "/live/plays" && p.indexOf("/wepa/") === -1)
         .map((p) => {
           return {
             path: res.paths[p],

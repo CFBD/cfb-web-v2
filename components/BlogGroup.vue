@@ -25,7 +25,7 @@ await blogStore.getPosts();
           <img :alt="post.imgAlt" :src="`${post.img}`" />
         </template>
         <template #title>{{ post.title }}</template>
-        <!-- <template #content>{{ post.excerpt }}</template> -->
+        <template #content>{{ post.excerpt }}</template>
         <template #footer>
           <a :href="post.href" target="_blank">
             <Button>Read more</Button>

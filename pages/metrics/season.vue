@@ -71,10 +71,11 @@ import InputNumber from 'primevue/inputnumber';
 
 import { computed, onMounted, ref } from 'vue';
 
+import type { TeamStats } from '~/types/teamStatTypes';
+
 import { useMainStore } from "~/stores/main";
 const mainStore = useMainStore();
-
-import http from '@/helpers/http';
+const config = useRuntimeConfig();
 
 const statTypes = ref([{
     value: 'offense',
@@ -159,7 +160,7 @@ const selectedYear = ref(mainStore.defaultYear);
 const conference = ref('All');
 const startWeek = ref(null);
 const endWeek = ref(null);
-const dataItems = ref([]);
+const dataItems: Ref<TeamStats[]> = ref([]);
 const chartData = ref([]);
 
 const chartOptions = ref({
@@ -202,17 +203,19 @@ const metricTypes1 = computed(() => metricTypes.value.filter(m => m.playFilters.
 const metricTypes2 = computed(() => metricTypes.value.filter(m => m.playFilters.includes(dataPoint2.value.playFilter)));
 
 const refreshData = async () => {
-    http.get('/stats/season/advanced', {
-        params: {
-            year: selectedYear.value,
-            excludeGarbageTime: true,
-            startWeek: startWeek.value,
-            endWeek: endWeek.value
-        }
-    }).then((res) => {
-        dataItems.value = res.data;
-        reloadData();
-    })
+  $fetch<TeamStats[]>('/stats/season/advanced', {
+    method: 'GET',
+    baseURL: config.public.apiBaseUrl,
+    params: {
+      year: selectedYear.value,
+      excludeGarbageTime: true,
+      startWeek: startWeek.value ?? undefined,
+      endWeek: endWeek.value ?? undefined,
+    }
+  }).then((data) => {
+    dataItems.value = data;
+    reloadData();
+  });
 };
 
 const reloadData = () => {

@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   $production: {
     runtimeConfig: {
       public: {
-        apiBaseUrl: 'https://api.collegefootballdata.com',
+        apiBaseUrl: 'https://apinext.collegefootballdata.com',
       },
     },
   },

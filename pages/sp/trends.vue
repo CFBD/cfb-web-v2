@@ -49,10 +49,10 @@ import Chart from 'primevue/chart';
 import Divider from 'primevue/divider';
 import Dropdown from 'primevue/dropdown';
 
-import http from "@/helpers/http";
-
 import { useMainStore } from '~/stores/main';
 const mainStore = useMainStore();
+
+const config = useRuntimeConfig();
 
 const datapoints = ref([{
     value: 'rating',
@@ -121,19 +121,23 @@ const chartOptions = ref({
 
 const refreshData = () => {
     if (selectedTeam.value) {
-        http.get('/ratings/sp', {
+        $fetch('/ratings/sp', {
+            method: 'GET',
+            baseURL: config.public.apiBaseUrl,
             params: {
                 team: selectedTeam.value.school
             }
         }).then(results => {
-            teamData.value = results.data;
+            teamData.value = results;
 
-            http.get('/ratings/sp/conferences', {
+            $fetch('/ratings/sp/conferences', {
+                method: 'GET',
+                baseURL: config.public.apiBaseUrl,
                 params: {
                     conference: mainStore.conferences.find(c => c.name == selectedTeam.value?.conference)?.abbreviation
                 }
             }).then(result => {
-                conferenceData.value = result.data;
+                conferenceData.value = result;
                 reloadData();
             });
         });
@@ -142,12 +146,14 @@ const refreshData = () => {
 
 const updateTeam2 = () => {
     if (comparisonTeam.value) {
-        http.get('/ratings/sp', {
+        $fetch('/ratings/sp', {
+            method: 'GET',
+            baseURL: config.public.apiBaseUrl,
             params: {
                 team: comparisonTeam.value.school
             }
         }).then(results => {
-            comparisonTeamData.value = results.data;
+            comparisonTeamData.value = results;
             reloadData();
         });
     } else {
