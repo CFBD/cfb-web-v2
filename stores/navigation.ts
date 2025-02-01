@@ -128,6 +128,21 @@ export const useNavigationStore = defineStore("navigation", () => {
         target: "_blank",
       },
       {
+        label: "Basketball",
+        items: [
+          {
+            label: "API",
+            url: "https://api.collegebasketballdata.com",
+            target: "_blank",
+          },
+          {
+            label: "Python",
+            url: "https://github.com/CFBD/cbbd-python",
+            target: "_blank",
+          }
+        ]
+      },
+      {
         label: "About",
         items: [
           {

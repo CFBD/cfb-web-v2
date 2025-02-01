@@ -13,6 +13,9 @@
 <template>
   <div class="grid home-content mt-3 pl-3">
     <main class="col-12 md:col-9">
+      <Message severity="info" :closable="false" class="mb-4">
+        A College Basketball API is now available for all Patreon subscribers! Use your same CFBD API key to access. General availability to be announced at a later date. <a href="https://api.collegebasketballdata.com">Check it out!</a>
+      </Message>
       <Message severity="warn" :closable="false" class="mb-4">
         CFBD API V2 is now in general availability.
         CFBD API V1 will be sunset in Spring 2025.
