@@ -131,6 +131,11 @@ export const useNavigationStore = defineStore("navigation", () => {
         label: "Basketball",
         items: [
           {
+            label: "Site",
+            url: "https://collegebasketballdata.com",
+            target: "_blank",
+          },
+          {
             label: "API",
             url: "https://api.collegebasketballdata.com",
             target: "_blank",
@@ -138,6 +143,11 @@ export const useNavigationStore = defineStore("navigation", () => {
           {
             label: "Python",
             url: "https://github.com/CFBD/cbbd-python",
+            target: "_blank",
+          },
+          {
+            label: "TypeScript",
+            url: "https://github.com/CFBD/cbbd-typescript",
             target: "_blank",
           }
         ]

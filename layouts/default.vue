@@ -5,6 +5,29 @@
 
   const mainStore = useMainStore();
   await mainStore.hyrdate();
+
+  useHead({
+    link: [
+      {
+        rel: "icon",
+        href: "https://cdn.collegefootballdata.com/favicon.ico",
+      }
+    ],
+    script: [
+      {
+      src: "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
+      async: true
+    },
+    {
+      innerHTML: `
+        (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3674605305984905",
+          enable_page_level_ads: true
+        });
+      `
+    }
+  ]
+  })
 </script>
 
 <template>
