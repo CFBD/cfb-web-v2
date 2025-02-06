@@ -14,7 +14,20 @@
       }
     ],
     script: [
-      {
+    {
+      src: "https://www.googletagmanager.com/gtag/js?id=G-BPYY3G7LL2",
+      async: true,
+    },
+    {
+      innerHTML: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-BPYY3G7LL2');
+      `,
+    },
+    {
       src: "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
       async: true
     },
