@@ -9,9 +9,9 @@ export function flattenData(key: string | undefined, data: any) {
         case '/coaches':
             for (const coach of data) {
                 flattened.push(...coach.seasons.map((s: DataObject) => {
-                    s.first_name = coach.first_name;
-                    s.last_name = coach.last_name;
-                    s.hire_date = coach.hire_date;
+                    s.firstName = coach.firstName;
+                    s.lastName = coach.lastName;
+                    s.hireDate = coach.hireDate;
 
                     return s;
                 }));
