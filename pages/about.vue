@@ -38,11 +38,12 @@
       <p>This website and its companion API are completely free to use without restrictions.
         Attribution
         is always greatly appreciated. Some functionality may be available exclusively to Patreon subscribers. Patreon
-        subscribers also are able to use the API with less frequent request throttling.</p>
-      <p>Please utilize good API usage habits when interacting with the API. This includes making
-        efficient use of calls to grab greater chunks of data at a time as opposed to more frequent calls of smaller data
-        chunks (i.e. "chunky" vs "chatty" calls). Abusing the free and public nature of the API may result in your key
-        becoming blacklisted.</p>
+        subscribers are alotted a greater number of monthly calls based on tier.</p>
+      <p>In order to make efficient use of your monthly calls, it is recommended to prefer "chunky" requests over "chatty" requests.
+        For example, if an endpoint only requires a "year" filter and you need data for every single team or every single game, it is better to make
+        a single request specifying only the "year" parameter and returning all needed data in a single call rather than making a request for each team (130+ requests) or game (800+ requests).
+        Similarly, if an endpoint requires a "week" parameter, you can grab an entire season's worth of data for all teams in ~15 calls (one for each week) contrasted with 130+ calls required to loop team-by-team.
+      </p>
       <Divider></Divider>
       <div class="text-lg font-bold text-center">Data Corrections and New Data</div>
       <p>If you have data corrections or even some new data you would like to submit for inclusion,

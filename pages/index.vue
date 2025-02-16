@@ -21,6 +21,28 @@
         CFBD API V1 will be sunset in Spring 2025.
         <a href="https://blog.collegefootballdata.com/api-v2-is-now-in-general-availability/">Click here for more details.</a>
       </Message>
+      <Card class="mb-4">
+          <template #title>Welcome to CollegeFootballData.com!</template>
+          <template #content>
+              <p class="m-0">
+                  CollegeFootballData.com is your source for college football data and analytics. Click the 'Data' tab to query and export data to CSV format.
+                  The best way to access data is via the public API in the programming language of your choice. Official packages are available for Python and TypeScript.
+                  A GraphQL API with live data subscriptions is also avaialable to Patreon Tier 3 subscribers.
+                  API keys are required for all requests and can be used for both the Football and Basketball APIs. <NuxtLink to="/key">Get your API key here!</NuxtLink>
+              </p>
+              <p class="m-0 mt-2">
+                This is a public API that comes from very humble beginnings, but is only made possible due the the support of Patreon subscribers.
+                As such, monthly requests are alotted by Patreon level. Patreon registration is NOT required for the free tier. Monthly call limits are as follows:
+                <ul>
+                  <li>Free Tier: 500 monthly calls</li>
+                  <li>Tier 1 ($1/mo): 5000 monthly calls</li>
+                  <li>Tier 2 ($5/mo): 30,000 monthly calls</li>
+                  <li>Tier 3 ($10/mo): 75,000 monthly calls (+ unlimited GraphQL requests)</li>
+                </ul>
+                If you need more than 75,000 monthly calls, please contact me directly.
+              </p>
+          </template>
+      </Card>
       <BlogGroup />
     </main>
     <div class="col-12 md:col-3 text-center">
