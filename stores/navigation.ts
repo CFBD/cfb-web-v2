@@ -79,7 +79,7 @@ export const useNavigationStore = defineStore("navigation", () => {
           },
           {
             label: "Python",
-            url: "https://github.com/CFBD/cfbd-python/tree/next",
+            url: "https://github.com/CFBD/cfbd-python",
             target: "_blank"
           },
           {
@@ -87,6 +87,11 @@ export const useNavigationStore = defineStore("navigation", () => {
             url: "https://www.npmjs.com/package/cfbd",
             target: "_blank"
           },
+          {
+            label: "C#",
+            url: "https://github.com/CFBD/cfbd-net",
+            target: "_blank"
+          }
         ],
       },
       {
