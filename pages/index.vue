@@ -33,6 +33,7 @@
               <p class="m-0 mt-2">
                 This is a public API that comes from very humble beginnings, but is only made possible due the the support of Patreon subscribers.
                 As such, monthly requests are alotted by Patreon level. Patreon registration is NOT required for the free tier. Monthly call limits are as follows:
+              </p>
                 <ul>
                   <li>Free Tier: 500 monthly calls</li>
                   <li>Tier 1 ($1/mo): 5000 monthly calls</li>
@@ -40,7 +41,6 @@
                   <li>Tier 3 ($10/mo): 75,000 monthly calls (+ unlimited GraphQL requests)</li>
                 </ul>
                 If you need more than 75,000 monthly calls, please contact me directly.
-              </p>
           </template>
       </Card>
       <BlogGroup />

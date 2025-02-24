@@ -25,7 +25,7 @@ export function flattenData(key: string | undefined, data: any) {
                             flattened.push(...type.athletes.map((a: DataObject) => {
                                 return {
                                     game_id: game.id,
-                                    school: team.school,
+                                    team: team.team,
                                     conference: team.conference,
                                     homeAway: team.homeAway,
                                     points: team.points,
@@ -46,7 +46,7 @@ export function flattenData(key: string | undefined, data: any) {
                     flattened.push(...team.stats.map((s: DataObject) => {
                         return {
                             game_id: game.id,
-                            school: team.school,
+                            team: team.team,
                             conference: team.conference,
                             homeAway: team.homeAway,
                             points: team.points,

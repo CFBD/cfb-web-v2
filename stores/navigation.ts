@@ -83,7 +83,7 @@ export const useNavigationStore = defineStore("navigation", () => {
             target: "_blank"
           },
           {
-            label: "JavaScript",
+            label: "TypeScript",
             url: "https://www.npmjs.com/package/cfbd",
             target: "_blank"
           },
