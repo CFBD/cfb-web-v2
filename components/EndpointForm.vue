@@ -36,6 +36,9 @@
                     <Dropdown v-else-if="qp.name === 'seasonType'" :id="`input-${qp.name}`"
                         :options="['regular', 'postseason', 'both']" v-model="apiStore.queryParams[qp.name]"
                         :placeholder="qp.description" class="w-10"></Dropdown>
+                    <Dropdown v-else-if="qp.name === 'classification'" :id="`input-${qp.name}`"
+                        :options="['fbs', 'fcs', 'ii', 'iii']" v-model="apiStore.queryParams[qp.name]"
+                        :placeholder="qp.description" class="w-10"></Dropdown>
                     <InputNumber v-else-if="qp.type === 'number' || qp.type === 'integer'" :id="`input-${qp.name}`"
                         :placeholder="qp.description //@ts-ignore
                             " :use-grouping="false" v-model="apiStore.queryParams[qp.name]" class="w-10">
