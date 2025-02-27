@@ -30,7 +30,7 @@
                     <PlayerSearch v-else-if="qp.name == 'athleteId' || qp.name == 'playerId'" :placeholder="qp.description //@ts-ignore
                         " v-model="apiStore.queryParams[qp.name]" show-team>
                     </PlayerSearch>
-                    <Checkbox v-else-if="qp.type === 'boolean'" :id="`input-${qp.name}`"
+                    <Checkbox v-else-if="qp.schema.type === 'boolean'" :id="`input-${qp.name}`"
                         v-model="apiStore.queryParams[qp.name]" :binary="true">
                     </Checkbox>
                     <Dropdown v-else-if="qp.name === 'seasonType'" :id="`input-${qp.name}`"
@@ -39,7 +39,7 @@
                     <Dropdown v-else-if="qp.name === 'classification'" :id="`input-${qp.name}`"
                         :options="['fbs', 'fcs', 'ii', 'iii']" v-model="apiStore.queryParams[qp.name]"
                         :placeholder="qp.description" class="w-10"></Dropdown>
-                    <InputNumber v-else-if="qp.type === 'number' || qp.type === 'integer'" :id="`input-${qp.name}`"
+                    <InputNumber v-else-if="qp.schema.type === 'number' || qp.schema.type === 'integer'" :id="`input-${qp.name}`"
                         :placeholder="qp.description //@ts-ignore
                             " :use-grouping="false" v-model="apiStore.queryParams[qp.name]" class="w-10">
                     </InputNumber>

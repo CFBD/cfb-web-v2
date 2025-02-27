@@ -21,7 +21,9 @@ interface Parameter {
   description: string;
   in: string;
   name: string;
-  type: string;
+  schema: {
+    type: string;
+  };
   required: boolean;
   currentValue?: string;
   default?: string | boolean | number;
@@ -150,7 +152,7 @@ export const useApiStore = defineStore("api", () => {
           value = query[qp.name]?.toString() ?? null;
         }
 
-        if (qp.type === "boolean" && value === null) {
+        if (qp.schema.type === "boolean" && value === null) {
           value = false;
         }
 
