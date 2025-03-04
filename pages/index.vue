@@ -35,7 +35,8 @@
                 As such, monthly requests are alotted by Patreon level. Patreon registration is NOT required for the free tier. Monthly call limits are as follows:
               </p>
                 <ul>
-                  <li>Free Tier: 500 monthly calls</li>
+                  <li>Free Tier: 1000 monthly calls</li>
+                  <li>Student/Academic Tier: 3000 monthly calls (register with an .edu email address)</li>
                   <li>Tier 1 ($1/mo): 5000 monthly calls</li>
                   <li>Tier 2 ($5/mo): 30,000 monthly calls</li>
                   <li>Tier 3 ($10/mo): 75,000 monthly calls (+ unlimited GraphQL requests)</li>

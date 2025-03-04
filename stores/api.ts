@@ -116,7 +116,7 @@ export const useApiStore = defineStore("api", () => {
         new Set(paths.value.map((p) => res.paths[p].get.tags[0]).filter((c) => c !== "AdjustedMetrics"))
       );
       endpoints.value = paths.value
-        .filter((p) => p !== "/games/weather" && p !== "/scoreboard" && p !== "/live/plays" && p.indexOf("/wepa/") === -1)
+        .filter((p) => p !== "/games/weather" && p !== "/scoreboard" && p !== "/live/plays" && p !== "/game/box/advanced" && p.indexOf("/wepa/") === -1)
         .map((p) => {
           return {
             path: res.paths[p],
