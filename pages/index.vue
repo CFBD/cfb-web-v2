@@ -14,7 +14,7 @@
   <div class="grid home-content mt-3 pl-3">
     <main class="col-12 md:col-9">
       <Message severity="info" :closable="false" class="mb-4">
-        A College Basketball API is now available for all Patreon subscribers! Use your same CFBD API key to access. General availability to be announced at a later date. <a href="https://api.collegebasketballdata.com">Check it out!</a>
+        A College Basketball API is now in general availability! Use your same CFBD API key to access. <a href="https://api.collegebasketballdata.com">Check it out!</a>
       </Message>
       <Message severity="warn" :closable="false" class="mb-4">
         CFBD API V2 is now in general availability.
@@ -41,7 +41,7 @@
                   <li>Tier 2 ($5/mo): 30,000 monthly calls</li>
                   <li>Tier 3 ($10/mo): 75,000 monthly calls (+ unlimited GraphQL requests)</li>
                 </ul>
-                If you need more than 75,000 monthly calls, please contact me directly.
+                If you need more than 75,000 monthly calls, please contact me directly. Monthly call totals are shared across the football and basketball APIs.
           </template>
       </Card>
       <BlogGroup />
