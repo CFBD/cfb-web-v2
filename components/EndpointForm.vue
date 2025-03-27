@@ -3,7 +3,7 @@
 <template>
     <Card class="m-3 pt-3">
         <template #header>
-            {{ apiStore.selectedEndpoint?.summary }}
+            {{ apiStore.selectedEndpoint?.description }}
         </template>
         <template #content>
             <div class="grid">
