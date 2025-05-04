@@ -18,7 +18,7 @@
       </Message>
       <Message severity="warn" :closable="false" class="mb-4">
         CFBD API V2 is now in general availability.
-        CFBD API V1 will be sunset in Spring 2025.
+        CFBD API V1 has officially been sunset.
         <a href="https://blog.collegefootballdata.com/api-v2-is-now-in-general-availability/">Click here for more details.</a>
       </Message>
       <Card class="mb-4">
