@@ -40,8 +40,10 @@
                   <li>Tier 1 ($1/mo): 5000 monthly calls</li>
                   <li>Tier 2 ($5/mo): 30,000 monthly calls</li>
                   <li>Tier 3 ($10/mo): 75,000 monthly calls (+ unlimited GraphQL requests)</li>
+                  <li>Tier 4 ($15/mo): 125,000 monthly calls (+ unlimited GraphQL requests)</li>
+                  <li>Tier 5 ($20/mo): 200,000 monthly calls (+ unlimited GraphQL requests)</li>
                 </ul>
-                If you need more than 75,000 monthly calls, please contact me directly. Monthly call totals are shared across the football and basketball APIs.
+                If you need more than 200,000 monthly calls, please contact me directly. Monthly call totals are shared across the football and basketball APIs.
           </template>
       </Card>
       <BlogGroup />
