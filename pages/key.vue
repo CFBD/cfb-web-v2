@@ -44,7 +44,7 @@
             CFBD API Keys
         </template>
         <template #subtitle>
-            Submit your email to receive your free API key
+            Submit your email to receive your free API key. By submittting your email, you agree to the <NuxtLink to="/terms">Terms & Conditions</NuxtLink>.
         </template>
         <template #content>
             <div v-if="showForm">

@@ -135,6 +135,10 @@ export const useNavigationStore = defineStore("navigation", () => {
             label: "FAQ & Info",
             route: "/about"
           },
+          {
+            label: "Terms & Conditions",
+            route: "/terms"
+          }
         ],
       },
     ];
