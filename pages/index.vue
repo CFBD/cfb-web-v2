@@ -24,26 +24,47 @@
       <Card class="mb-4">
           <template #title>Welcome to CollegeFootballData.com!</template>
           <template #content>
-              <p class="m-0">
-                  CollegeFootballData.com is your source for college football data and analytics. Click the 'Data' tab to query and export data to CSV format.
-                  The best way to access data is via the public API in the programming language of your choice. Official packages are available for Python and TypeScript.
-                  A GraphQL API with live data subscriptions is also avaialable to Patreon Tier 3 subscribers.
-                  API keys are required for all requests and can be used for both the Football and Basketball APIs. <NuxtLink to="/key">Get your API key here!</NuxtLink>
-              </p>
-              <p class="m-0 mt-2">
-                This is a public API that comes from very humble beginnings, but is only made possible due the the support of Patreon subscribers.
-                As such, monthly requests are alotted by Patreon level. Patreon registration is NOT required for the free tier. Monthly call limits are as follows:
-              </p>
-                <ul>
-                  <li>Free Tier: 1000 monthly calls</li>
-                  <li>Student/Academic Tier: 3000 monthly calls (register with an .edu email address)</li>
-                  <li>Tier 1 ($1/mo): 5000 monthly calls</li>
-                  <li>Tier 2 ($5/mo): 30,000 monthly calls</li>
-                  <li>Tier 3 ($10/mo): 75,000 monthly calls (+ unlimited GraphQL requests)</li>
-                  <li>Tier 4 ($15/mo): 125,000 monthly calls (+ unlimited GraphQL requests)</li>
-                  <li>Tier 5 ($20/mo): 200,000 monthly calls (+ unlimited GraphQL requests)</li>
-                </ul>
-                If you need more than 200,000 monthly calls, please contact me directly. Monthly call totals are shared across the football and basketball APIs.
+            <p class="m-0">
+              <strong>CollegeFootballData.com</strong> is your home for college football (and now basketball) data and analytics.
+            </p>
+
+            <ul class="mt-2">
+              <li>🔎 Browse data via the <NuxtLink to="/data">Data tab</NuxtLink></li>
+              <li>⚙️ Access our public API with official clients for <strong>Python</strong> and <strong>TypeScript</strong></li>
+              <li>📡 GraphQL API (with live data subscriptions) available to <strong>Patreon Tier 3+</strong></li>
+              <li>🔑 API keys are required and work across both Football and Basketball APIs.
+                <NuxtLink to="/key">Get yours here</NuxtLink>
+              </li>
+            </ul>
+
+            <p class="m-0 mt-3">
+              📦 <strong>Just Released:</strong> The <strong>CFBD Starter Pack</strong>
+            </p>
+            <ul class="mt-2">
+              <li>📂 Clean historical data (games, drives, plays, advanced stats)</li>
+              <li>🧠 12 Jupyter notebooks for modeling, rankings, dashboards, and more</li>
+              <li>⚡ Optimized to reduce API usage and accelerate your workflow</li>
+              <li>👉 <a href="https://collegefootballdata.gumroad.com/l/starter-pack" target="_blank">Learn more & download</a></li>
+            </ul>
+
+            <p class="m-0 mt-3">
+              API access is supported by Patreon subscribers. Monthly call limits are based on your tier:
+            </p>
+
+            <ul class="mt-2">
+              <li><strong>Free Tier</strong>: 1,000 calls/month</li>
+              <li><strong>Student/Academic</strong>: 3,000 calls/month (with .edu email)</li>
+              <li><strong>Tier 1</strong> ($1/mo): 5,000 calls/month</li>
+              <li><strong>Tier 2</strong> ($5/mo): 30,000 calls/month</li>
+              <li><strong>Tier 3</strong> ($10/mo): 75,000 calls/month + unlimited GraphQL</li>
+              <li><strong>Tier 4</strong> ($15/mo): 125,000 calls/month + unlimited GraphQL</li>
+              <li><strong>Tier 5</strong> ($20/mo): 200,000 calls/month + unlimited GraphQL</li>
+            </ul>
+
+            <p class="m-0">
+              Need more than 200,000 monthly calls? <a href="mailto:admin@collegefootballdata.com">Contact me directly</a>.
+              Monthly limits are shared across both APIs.
+            </p>
           </template>
       </Card>
       <BlogGroup />
