@@ -25,7 +25,7 @@ export const useBlogStore = defineStore("blog", () => {
 
     api.posts
       .browse({
-        limit: 6,
+        limit: 5,
         include: "tags",
       })
       .then((blogPosts: PostsOrPages) => {

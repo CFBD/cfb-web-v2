@@ -13,6 +13,36 @@
 <template>
   <div class="grid home-content mt-3 pl-3">
     <main class="col-12 md:col-9">
+      <Card class="mb-4">
+        <template #title>
+          Build college football models and tools in a weekend. No scraping. No cleanup.
+        </template>
+        <template #subtitle>
+          Clean, structured college football data delivered via API and prebuilt packs. Just plug it in and start building.
+        </template>
+        <template #content>
+          <div class="grid mt-4">
+            <div class="col-12 md:col-2" />
+            <div class="col-12 md:col-4">
+              <NuxtLink to="/key">
+                <Button label="🚀 Start Building Now" size="large" class="w-full mb-3  pt-3 pb-3" />
+              </NuxtLink>
+            </div>
+            <div class="col-12 md:col-4">
+              <a href="https://collegefootballdata.gumroad.com/l/starter-pack" target="_blank">
+                <Button label="📦 Explore the Starter Pack" size='large' class="w-full mb-3 pt-3 pb-3" />
+              </a>
+            </div>
+            <div class="col-12 md:col-2" />
+          </div>
+
+          <div class="mt-3">
+            <strong>✨ Trusted by 5,000+ users making 50M+ API calls each season</strong><br />
+            💡 500+ supporters on <a href="https://www.patreon.com/collegefootballdata">Patreon</a><br />
+            📦 150+ supporters on <a href="https://collegefootballdata.gumroad.com/l/starter-pack">Gumroad</a>
+          </div>
+        </template>
+      </Card>
       <Message severity="info" :closable="false" class="mb-4">
         A College Basketball API is now in general availability! Use your same CFBD API key to access. <a href="https://api.collegebasketballdata.com">Check it out!</a>
       </Message>
@@ -21,53 +51,49 @@
         CFBD API V1 has officially been sunset.
         <a href="https://blog.collegefootballdata.com/api-v2-is-now-in-general-availability/">Click here for more details.</a>
       </Message>
-      <Card class="mb-4">
-          <template #title>Welcome to CollegeFootballData.com!</template>
-          <template #content>
-            <p class="m-0">
-              <strong>CollegeFootballData.com</strong> is your home for college football (and now basketball) data and analytics.
-            </p>
+      <div class="grid">
+        <div class="col-12 md:col-6">
+          <Card class="mb-4">
+              <template #title>Welcome to CollegeFootballData.com</template>
+              <template #content>
+                <p class="m-0 mt-3">
+                  🔭 <strong>Explore</strong>
+                </p>
+                <ul class="mt-2">
+                  <li>🔎 Browse data via the <NuxtLink to="/data">Data tab</NuxtLink></li>
+                  <li>⚙️ Access our public API with official clients for <strong>Python</strong> and <strong>TypeScript</strong></li>
+                  <li>📡 GraphQL API (with live data subscriptions) available to <strong>Patreon Tier 3+</strong></li>
+                  <li>🔑 API keys are required and work across both Football and Basketball APIs.
+                    <NuxtLink to="/key">Get yours here</NuxtLink>
+                  </li>
+                </ul>
 
-            <ul class="mt-2">
-              <li>🔎 Browse data via the <NuxtLink to="/data">Data tab</NuxtLink></li>
-              <li>⚙️ Access our public API with official clients for <strong>Python</strong> and <strong>TypeScript</strong></li>
-              <li>📡 GraphQL API (with live data subscriptions) available to <strong>Patreon Tier 3+</strong></li>
-              <li>🔑 API keys are required and work across both Football and Basketball APIs.
-                <NuxtLink to="/key">Get yours here</NuxtLink>
-              </li>
-            </ul>
-
-            <p class="m-0 mt-3">
-              📦 <strong>Just Released:</strong> The <strong>CFBD Starter Pack</strong>
-            </p>
-            <ul class="mt-2">
-              <li>📂 Clean historical data (games, drives, plays, advanced stats)</li>
-              <li>🧠 12 Jupyter notebooks for modeling, rankings, dashboards, and more</li>
-              <li>⚡ Optimized to reduce API usage and accelerate your workflow</li>
-              <li>👉 <a href="https://collegefootballdata.gumroad.com/l/starter-pack" target="_blank">Learn more & download</a></li>
-            </ul>
-
-            <p class="m-0 mt-3">
-              API access is supported by Patreon subscribers. Monthly call limits are based on your tier:
-            </p>
-
-            <ul class="mt-2">
-              <li><strong>Free Tier</strong>: 1,000 calls/month</li>
-              <li><strong>Student/Academic</strong>: 3,000 calls/month (with .edu email)</li>
-              <li><strong>Tier 1</strong> ($1/mo): 5,000 calls/month</li>
-              <li><strong>Tier 2</strong> ($5/mo): 30,000 calls/month</li>
-              <li><strong>Tier 3</strong> ($10/mo): 75,000 calls/month + unlimited GraphQL</li>
-              <li><strong>Tier 4</strong> ($15/mo): 125,000 calls/month + unlimited GraphQL</li>
-              <li><strong>Tier 5</strong> ($20/mo): 200,000 calls/month + unlimited GraphQL</li>
-            </ul>
-
-            <p class="m-0">
-              Need more than 200,000 monthly calls? <a href="mailto:admin@collegefootballdata.com">Contact me directly</a>.
-              Monthly limits are shared across both APIs.
-            </p>
-          </template>
-      </Card>
-      <BlogGroup />
+                <p class="m-0 mt-3">
+                  📦 <strong>Just Released:</strong> The <strong>CFBD Starter Pack</strong>
+                </p>
+                <ul class="mt-2">
+                  <li>📂 Clean historical data (games, drives, plays, advanced stats)</li>
+                  <li>🧠 12 Jupyter notebooks for modeling, rankings, dashboards, and more</li>
+                  <li>⚡ Optimized to reduce API usage and accelerate your workflow</li>
+                  <li>👉 <a href="https://collegefootballdata.gumroad.com/l/starter-pack" target="_blank">Learn more & download</a></li>
+                </ul>
+              </template>
+          </Card>
+        </div>
+        <div class="col-12 md:col-6">
+          <Card>
+            <template #title>
+              CFBD Blog
+            </template>
+            <template #subtitle>
+              Insights, updates, and tutorials on using the CFBD API.
+            </template>
+            <template #content>
+              <BlogGroup />
+            </template>
+          </Card>
+        </div>
+      </div>
     </main>
     <div class="col-12 md:col-3 text-center">
       <div class="mt-3">
