@@ -1,19 +1,22 @@
 <script setup lang="ts">
-import { useBlogStore } from "~/stores/blog";
+import { useBlogStore } from '~/stores/blog';
 
 const blogStore = useBlogStore();
 await blogStore.getPosts();
 </script>
 
 <template>
-      <div
-        v-for="post in blogStore.posts"
-        :key="post.id"
-        class="mt-2"
+  <div v-for="post in blogStore.posts" :key="post.id" class="mt-2">
+    <div>
+      {{ post.title }}<br /><a
+        :href="post.href"
+        target="_blank"
+        :style="{ textDecoration: 'none' }"
+        >Read more...</a
       >
-        <div>{{ post.title }}<br /><a :href="post.href" target="_blank" :style="{ textDecoration: 'none' }">Read more...</a></div>
-        <Divider />
-      </div>
+    </div>
+    <Divider />
+  </div>
 </template>
 
 <style lang="scss">

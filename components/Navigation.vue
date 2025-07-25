@@ -20,10 +20,16 @@
           <span>{{ item.label }}</span>
         </a>
       </router-link>
-      <a v-else v-ripple :href="item.url" :target="item.target" v-bind="props.action">
-          <span :class="item.icon" />
-          <span>{{ item.label }}</span>
-          <span v-if="hasSubmenu" class="pi pi-fw pi-angle-down" />
+      <a
+        v-else
+        v-ripple
+        :href="item.url"
+        :target="item.target"
+        v-bind="props.action"
+      >
+        <span :class="item.icon" />
+        <span>{{ item.label }}</span>
+        <span v-if="hasSubmenu" class="pi pi-fw pi-angle-down" />
       </a>
     </template>
     <template #end>
@@ -35,10 +41,10 @@
 </template>
 
 <script setup lang="ts">
-import { useMainStore } from "~/stores/main";
-import { useNavigationStore } from "~/stores/navigation";
-import Menubar from "primevue/menubar";
-import Button from "primevue/button";
+import { useMainStore } from '~/stores/main';
+import { useNavigationStore } from '~/stores/navigation';
+import Menubar from 'primevue/menubar';
+import Button from 'primevue/button';
 
 const mainStore = useMainStore();
 const navigationStore = useNavigationStore();

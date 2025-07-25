@@ -92,14 +92,14 @@ jobs:
     needs: publish
     runs-on: ubuntu-latest
     steps:
-    - name: Deploy via SSH
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        passphrase: ${{ secrets.SSH_PASSPHRASE }}
-        key: ${{ secrets.SSH_KEY }}
-        script: |
-          cd /docker/cfb
-          docker pull ${{ env.REGISTRY }}/cfbd/cfb-web-v2:main
-          docker-compose up -d
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /docker/cfb
+            docker pull ${{ env.REGISTRY }}/cfbd/cfb-web-v2:main
+            docker-compose up -d

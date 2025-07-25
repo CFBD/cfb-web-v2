@@ -1,12 +1,16 @@
-import { computed, ref } from "vue";
-import type { Ref } from "vue";
-import { defineStore } from "pinia";
+import { computed, ref } from 'vue';
+import type { Ref } from 'vue';
+import { defineStore } from 'pinia';
 
-import { useToast } from "primevue/usetoast";
+import { useToast } from 'primevue/usetoast';
 
-import type { FieldsetToggleEvent } from "primevue/fieldset";
-import { flattenData } from "~/utils/data";
-import type { LocationQuery, LocationQueryValue, RouteLocationNormalizedLoadedGeneric } from "vue-router";
+import type { FieldsetToggleEvent } from 'primevue/fieldset';
+import { flattenData } from '~/utils/data';
+import type {
+  LocationQuery,
+  LocationQueryValue,
+  RouteLocationNormalizedLoadedGeneric,
+} from 'vue-router';
 
 interface ResultField {
   item: string;
@@ -14,7 +18,7 @@ interface ResultField {
 }
 
 interface QueryParameters {
-  [key: string]: string | boolean | number | null
+  [key: string]: string | boolean | number | null;
 }
 
 interface Parameter {
@@ -46,7 +50,7 @@ export interface Endpoint {
   key: string;
 }
 
-export const useApiStore = defineStore("api", () => {
+export const useApiStore = defineStore('api', () => {
   const config = useRuntimeConfig();
   const toast = useToast();
 
@@ -59,7 +63,7 @@ export const useApiStore = defineStore("api", () => {
   const categories: Ref<string[]> = ref([]);
   const endpoints: Ref<Endpoint[]> = ref([]);
   const selectedEndpoint: Ref<Endpoint | null | undefined> = ref(null);
-  const endpointFilter = ref("");
+  const endpointFilter = ref('');
   const collapseSelections = ref(false);
   const loadingData = ref(false);
 
@@ -67,13 +71,19 @@ export const useApiStore = defineStore("api", () => {
 
   const queryParams: Ref<QueryParameters> = ref({});
 
-  const showEndpointForm = computed(() => selectedEndpoint.value ? true : false);
-  const showDataTable = computed(() => loadingData.value || (dataItems.value && dataItems.value.length));
+  const showEndpointForm = computed(() =>
+    selectedEndpoint.value ? true : false,
+  );
+  const showDataTable = computed(
+    () => loadingData.value || (dataItems.value && dataItems.value.length),
+  );
   const allFields: Ref<ResultField[]> = computed(() => {
     if (dataItems.value && dataItems.value.length) {
-      return Object.keys(dataItems.value[0]).map(k => ({
+      return Object.keys(dataItems.value[0]).map((k) => ({
         item: k,
-        name: k.replace(/^[-_]*(.)/, (_, c) => c.toUpperCase()).replace(/[-_]+(.)/g, (_, c) => ' ' + c.toUpperCase())
+        name: k
+          .replace(/^[-_]*(.)/, (_, c) => c.toUpperCase())
+          .replace(/[-_]+(.)/g, (_, c) => ' ' + c.toUpperCase()),
       }));
     } else {
       return [];
@@ -83,18 +93,20 @@ export const useApiStore = defineStore("api", () => {
   const displayFields: Ref<ResultField[]> = ref([]);
 
   const filteredCategories = computed(() =>
-    categories.value.filter((c) => getCategoryEndpoints(c).length > 0).sort((a: string, b: string) => a.localeCompare(b))
+    categories.value
+      .filter((c) => getCategoryEndpoints(c).length > 0)
+      .sort((a: string, b: string) => a.localeCompare(b)),
   );
 
   function getCategoryEndpoints(category: string): Endpoint[] {
     return endpoints.value.filter(
       (e) =>
         e.category === category &&
-        e.description?.toLowerCase().indexOf("patreon") === -1 &&
+        e.description?.toLowerCase().indexOf('patreon') === -1 &&
         (!endpointFilter.value ||
           e.description
             .toLowerCase()
-            .indexOf(endpointFilter.value.toLowerCase()) !== -1)
+            .indexOf(endpointFilter.value.toLowerCase()) !== -1),
     );
   }
 
@@ -105,18 +117,29 @@ export const useApiStore = defineStore("api", () => {
 
     try {
       hyrdating.value = true;
-      const res = await $fetch<any>("/api-docs.json", {
-        method: "GET",
+      const res = await $fetch<any>('/api-docs.json', {
+        method: 'GET',
         baseURL: config.public.apiBaseUrl,
       });
 
       docs.value = res;
       paths.value = Object.keys(res.paths);
       categories.value = Array.from(
-        new Set(paths.value.map((p) => res.paths[p].get.tags[0]).filter((c) => c !== "AdjustedMetrics"))
+        new Set(
+          paths.value
+            .map((p) => res.paths[p].get.tags[0])
+            .filter((c) => c !== 'AdjustedMetrics'),
+        ),
       );
       endpoints.value = paths.value
-        .filter((p) => p !== "/games/weather" && p !== "/scoreboard" && p !== "/live/plays" && p !== "/game/box/advanced" && p.indexOf("/wepa/") === -1)
+        .filter(
+          (p) =>
+            p !== '/games/weather' &&
+            p !== '/scoreboard' &&
+            p !== '/live/plays' &&
+            p !== '/game/box/advanced' &&
+            p.indexOf('/wepa/') === -1,
+        )
         .map((p) => {
           return {
             path: res.paths[p],
@@ -125,13 +148,12 @@ export const useApiStore = defineStore("api", () => {
             key: p,
           };
         });
-    }
-    finally {
+    } finally {
       hyrdating.value = false;
     }
   }
 
-  function selectPath(path: string) {
+  function selectPath() {
     collapseSelections.value = true;
     // router.replace(`/exporter${path}`);
   }
@@ -148,11 +170,15 @@ export const useApiStore = defineStore("api", () => {
       for (const qp of selectedEndpoint.value.path.get.parameters) {
         let value = qp.default ?? null;
 
-        if (Object.keys(query).map(q => q.toLowerCase()).includes(qp.name)) {
+        if (
+          Object.keys(query)
+            .map((q) => q.toLowerCase())
+            .includes(qp.name)
+        ) {
           value = query[qp.name]?.toString() ?? null;
         }
 
-        if (qp.schema.type === "boolean" && value === null) {
+        if (qp.schema.type === 'boolean' && value === null) {
           value = false;
         }
 
@@ -170,25 +196,25 @@ export const useApiStore = defineStore("api", () => {
   function updateParams(route: RouteLocationNormalizedLoadedGeneric) {
     currentRoute = route;
     updatePath(
-      Array.isArray(currentRoute.params.endpoint) ? currentRoute.params.endpoint.join("/") : currentRoute.params.endpoint,
+      Array.isArray(currentRoute.params.endpoint)
+        ? currentRoute.params.endpoint.join('/')
+        : currentRoute.params.endpoint,
       currentRoute.query,
     );
   }
 
   function updateQueryParams() {
-    const o = Object.keys(queryParams.value)
-      .filter((k) => queryParams.value[k] != null)
-      .reduce((a, k) => ({ ...a, [k]: queryParams.value[k] }), {});
-
-      if (currentRoute) {
-        for (let key of Object.keys(queryParams.value)) {
-          if (queryParams.value[key]) {
-            currentRoute.query[key] = queryParams.value[key] as LocationQueryValue;
-          }
+    if (currentRoute) {
+      for (let key of Object.keys(queryParams.value)) {
+        if (queryParams.value[key]) {
+          currentRoute.query[key] = queryParams.value[
+            key
+          ] as LocationQueryValue;
         }
       }
+    }
 
-      router.replace({ query: currentRoute?.query });
+    router.replace({ query: currentRoute?.query });
   }
 
   function query() {
@@ -197,28 +223,44 @@ export const useApiStore = defineStore("api", () => {
       updateQueryParams();
 
       $fetch<any>(selectedEndpoint.value?.key, {
-        method: "GET",
+        method: 'GET',
         baseURL: config.public.apiBaseUrl,
         params: currentRoute?.query,
-      }).then((res) => {
-        dataItems.value = flattenData(selectedEndpoint.value?.key, res);
-        displayFields.value = allFields.value;
-        loadingData.value = false;
-
-        if (!dataItems.value || dataItems.value.length === 0) {
-          toast.add({ severity: "info", summary: "No data returned", detail: "Try specifying different filter values and resubmitting.", life: 3000 })
-        }
-      }).catch(() => {
-        toast.add({ severity: "warn", summary: "Invalid query", detail: "Try adding more filter values and resubmitting.", life: 3000 })
-      }).finally(() => {
-        loadingData.value = false;
       })
+        .then((res) => {
+          dataItems.value = flattenData(selectedEndpoint.value?.key, res);
+          displayFields.value = allFields.value;
+          loadingData.value = false;
+
+          if (!dataItems.value || dataItems.value.length === 0) {
+            toast.add({
+              severity: 'info',
+              summary: 'No data returned',
+              detail:
+                'Try specifying different filter values and resubmitting.',
+              life: 3000,
+            });
+          }
+        })
+        .catch(() => {
+          toast.add({
+            severity: 'warn',
+            summary: 'Invalid query',
+            detail: 'Try adding more filter values and resubmitting.',
+            life: 3000,
+          });
+        })
+        .finally(() => {
+          loadingData.value = false;
+        });
     }
   }
 
   function toggleColumn(values: ResultField[]) {
-    const items = values.map(v => v.item);
-    displayFields.value = allFields.value.filter(col => items.includes(col.item));
+    const items = values.map((v) => v.item);
+    displayFields.value = allFields.value.filter((col) =>
+      items.includes(col.item),
+    );
   }
 
   return {
@@ -244,6 +286,6 @@ export const useApiStore = defineStore("api", () => {
     updatePath,
     updateParams,
     query,
-    toggleColumn
+    toggleColumn,
   };
 });

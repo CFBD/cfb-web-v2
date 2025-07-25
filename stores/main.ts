@@ -1,6 +1,6 @@
-import { ref } from "vue";
-import type { Ref } from "vue";
-import { defineStore } from "pinia";
+import { ref } from 'vue';
+import type { Ref } from 'vue';
+import { defineStore } from 'pinia';
 
 interface Team {
   id: number;
@@ -33,7 +33,7 @@ interface PlayStatType {
   name: string;
 }
 
-export const useMainStore = defineStore("main", () => {
+export const useMainStore = defineStore('main', () => {
   const config = useRuntimeConfig();
   const isHydrating = ref(false);
 
@@ -42,73 +42,75 @@ export const useMainStore = defineStore("main", () => {
   const playTypes: Ref<PlayType[]> = ref([]);
   const playStatTypes: Ref<PlayStatType[]> = ref([]);
 
-  const yearRanges = ref([2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]);
+  const yearRanges = ref([
+    2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024,
+  ]);
   const defaultYear = ref(2024);
 
   const fbsConferences = ref([
     {
-      value: "All",
-      text: "All"
+      value: 'All',
+      text: 'All',
     },
     {
-      value: "ACC",
-      text: "ACC"
+      value: 'ACC',
+      text: 'ACC',
     },
     {
-      value: "AAC",
-      text: "American Athletic"
+      value: 'AAC',
+      text: 'American Athletic',
     },
     {
-      value: "B12",
-      text: "Big 12"
+      value: 'B12',
+      text: 'Big 12',
     },
     {
-      value: "B1G",
-      text: "Big Ten"
+      value: 'B1G',
+      text: 'Big Ten',
     },
     {
-      value: "CUSA",
-      text: "Conference USA"
+      value: 'CUSA',
+      text: 'Conference USA',
     },
     {
-      value: "Ind",
-      text: "FBS Independents"
+      value: 'Ind',
+      text: 'FBS Independents',
     },
     {
-      value: "MAC",
-      text: "Mid-American"
+      value: 'MAC',
+      text: 'Mid-American',
     },
     {
-      value: "Mountain West",
-      text: "MWC"
+      value: 'Mountain West',
+      text: 'MWC',
     },
     {
-      value: "PAC",
-      text: "Pac-12"
+      value: 'PAC',
+      text: 'Pac-12',
     },
     {
-      value: "SEC",
-      text: "SEC"
+      value: 'SEC',
+      text: 'SEC',
     },
     {
-      value: "SBC",
-      text: "Sun Belt"
-    }
+      value: 'SBC',
+      text: 'Sun Belt',
+    },
   ]);
 
   const seasonTypes = ref([
     {
-      value: "regular",
-      text: "Regular"
+      value: 'regular',
+      text: 'Regular',
     },
     {
-      value: "postseason",
-      text: "Postseason"
+      value: 'postseason',
+      text: 'Postseason',
     },
   ]);
 
   async function loadTeams() {
-    const data = await $fetch<Team[]>("/teams", {
+    const data = await $fetch<Team[]>('/teams', {
       method: 'GET',
       baseURL: config.public.apiBaseUrl,
     });
@@ -116,7 +118,7 @@ export const useMainStore = defineStore("main", () => {
   }
 
   async function getConferences() {
-    const data = await $fetch<Conference[]>("/conferences", {
+    const data = await $fetch<Conference[]>('/conferences', {
       baseURL: config.public.apiBaseUrl,
       method: 'GET',
     });
@@ -124,7 +126,7 @@ export const useMainStore = defineStore("main", () => {
   }
 
   async function getPlayTypes() {
-    const data = await $fetch<PlayType[]>("/plays/types", {
+    const data = await $fetch<PlayType[]>('/plays/types', {
       baseURL: config.public.apiBaseUrl,
       method: 'GET',
     });
@@ -132,7 +134,7 @@ export const useMainStore = defineStore("main", () => {
   }
 
   async function getPlayStatTypes() {
-    const data = await $fetch<PlayStatType[]>("/plays/stats/types", {
+    const data = await $fetch<PlayStatType[]>('/plays/stats/types', {
       baseURL: config.public.apiBaseUrl,
       method: 'GET',
     });
@@ -176,6 +178,6 @@ export const useMainStore = defineStore("main", () => {
     yearRanges,
     defaultYear,
     fbsConferences,
-    seasonTypes
+    seasonTypes,
   };
 });

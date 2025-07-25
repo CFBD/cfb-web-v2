@@ -1,21 +1,21 @@
 <script setup lang="ts">
-  import { useMainStore } from "~/stores/main";
+import { useMainStore } from '~/stores/main';
 
-  const currentYear = new Date().getFullYear();
+const currentYear = new Date().getFullYear();
 
-  const mainStore = useMainStore();
-  await mainStore.hyrdate();
+const mainStore = useMainStore();
+await mainStore.hyrdate();
 
-  useHead({
-    link: [
-      {
-        rel: "icon",
-        href: "https://cdn.collegefootballdata.com/favicon.ico",
-      }
-    ],
-    script: [
+useHead({
+  link: [
     {
-      src: "https://www.googletagmanager.com/gtag/js?id=G-BPYY3G7LL2",
+      rel: 'icon',
+      href: 'https://cdn.collegefootballdata.com/favicon.ico',
+    },
+  ],
+  script: [
+    {
+      src: 'https://www.googletagmanager.com/gtag/js?id=G-BPYY3G7LL2',
       async: true,
     },
     {
@@ -28,8 +28,8 @@
       `,
     },
     {
-      src: "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
-      async: true
+      src: '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+      async: true,
     },
     {
       innerHTML: `
@@ -37,10 +37,10 @@
           google_ad_client: "ca-pub-3674605305984905",
           enable_page_level_ads: true
         });
-      `
-    }
-  ]
-  })
+      `,
+    },
+  ],
+});
 </script>
 
 <template>
