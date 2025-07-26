@@ -40,7 +40,7 @@ export default defineNuxtConfig({
     },
   },
   compatibilityDate: '2024-04-03',
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   ssr: false,
   modules: ['@primevue/nuxt-module', '@pinia/nuxt'],
   css: ['primeflex/primeflex.css', 'primeicons/primeicons.css'],

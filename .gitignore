@@ -31,3 +31,5 @@ coverage
 build
 .nuxt
 .output
+
+*DEVELOPMENT_PLAN.md
