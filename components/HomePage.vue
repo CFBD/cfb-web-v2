@@ -38,6 +38,18 @@ const primaryCtas: CtaItem[] = [
     ariaLabel: 'Download the CFBD Starter Pack from Gumroad',
   },
   {
+    id: 'training-pack',
+    title: 'Get the Model Training Pack',
+    subtitle:
+      'Pre-built training data (week 5+) & 7 Jupyter notebooks with prebuilt models to jumpstart your predictive modeling',
+    buttonText: 'Download Now',
+    buttonIcon: 'pi pi-download',
+    href: 'https://collegefootballdata.gumroad.com/l/model-training-pack',
+    external: true,
+    severity: 'success',
+    ariaLabel: 'Download the CFBD Model Training Pack from Gumroad',
+  },
+  {
     id: 'api-access',
     title: 'Unlock API Access',
     subtitle:
@@ -94,7 +106,7 @@ await blogStore.getPosts();
 
         <!-- Primary CTAs Grid -->
         <div class="cta-grid grid">
-          <div v-for="cta in primaryCtas" :key="cta.id" class="col-12 md:col-4">
+          <div v-for="cta in primaryCtas" :key="cta.id" class="col-12 md:col-6">
             <Card class="cta-card h-full">
               <template #header>
                 <div class="cta-card-header p-4 pb-0">
